@@ -1,6 +1,6 @@
 # Ng2twitter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.4, and is a rewrite of an assessment project for FastTrack'd training program at Cook Systems.
 
 ## Development server
 
