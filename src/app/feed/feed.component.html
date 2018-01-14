@@ -1,10 +1,18 @@
-<p>
-  feed works!
-</p>
+<h2>
+  Some example material buttons, icon:
+</h2>
 <div>
   <a mat-button color="primary">Flat button</a>
   <a mat-raised-button color="accent">Raised button</a>
   <a mat-fab color="primary">fab</a>
   <a mat-mini-fab color="primary">mini</a>
   <i class="material-icons">face</i>
+</div>
+<h2>My Feed</h2>
+<div class="tweets">
+  <mat-card class="tweet-card" *ngFor="let tweet of tweets">
+    <mat-card-title>{{tweet.author.username}}</mat-card-title>
+    <mat-card-footer>{{tweet.posted}}</mat-card-footer>
+    <mat-card-content>{{tweet.content}}</mat-card-content>
+  </mat-card>
 </div>
