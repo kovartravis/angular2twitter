@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
 
   emailMatcher = new EmailErrorStateMatcher();
 
-  user: User = {
+  user: NewUser = {
     email: '',
     fullname: '',
     username: '',
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
 
 }
 
-interface User{
+interface NewUser{
   email: string;
   fullname: string;
   username: string;
