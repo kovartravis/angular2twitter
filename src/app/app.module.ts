@@ -14,6 +14,7 @@ import { LandingComponent } from './landing/landing.component';
 import { FeedComponent } from './feed/feed.component';
 import { UserService } from './user.service';
 import { TweetComponent } from './tweet/tweet.component';
+import { LinkifyPipe } from './linkify.pipe';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TweetComponent } from './tweet/tweet.component';
     SignupComponent,
     LandingComponent,
     FeedComponent,
-    TweetComponent
+    TweetComponent,
+    LinkifyPipe
   ],
   imports: [
     BrowserModule,

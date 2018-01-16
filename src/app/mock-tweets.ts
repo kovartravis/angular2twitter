@@ -16,7 +16,7 @@ export const TWEETS: Tweet[] = [
           }
       },
     posted: 1515903048342,
-    content: '@ddunster2 Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. ',
+    content: '@ddunster2 Curabitur convallis. bob@example.com Duis google.com consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. ',
     inRepostOf: null,
     inReplyTo: null
   },
