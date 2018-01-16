@@ -15,6 +15,7 @@ import { FeedComponent } from './feed/feed.component';
 import { UserService } from './user.service';
 import { TweetComponent } from './tweet/tweet.component';
 import { LinkifyPipe } from './linkify.pipe';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { LinkifyPipe } from './linkify.pipe';
     LandingComponent,
     FeedComponent,
     TweetComponent,
-    LinkifyPipe
+    LinkifyPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
