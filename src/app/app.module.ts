@@ -12,6 +12,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { FeedComponent } from './feed/feed.component';
+import { TweetComponent } from './tweet/tweet.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FeedComponent } from './feed/feed.component';
     AppComponent,
     SignupComponent,
     LandingComponent,
-    FeedComponent
+    FeedComponent,
+    TweetComponent
   ],
   imports: [
     BrowserModule,

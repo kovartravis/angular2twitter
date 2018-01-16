@@ -10,9 +10,5 @@
 </div>
 <h2>My Feed</h2>
 <div class="tweets">
-  <mat-card class="tweet-card" *ngFor="let tweet of tweets">
-    <mat-card-title>{{tweet.author.username}}</mat-card-title>
-    <mat-card-footer>{{tweet.posted}}</mat-card-footer>
-    <mat-card-content>{{tweet.content}}</mat-card-content>
-  </mat-card>
+  <app-tweet *ngFor="let item of tweets" [tweet]="item"></app-tweet>
 </div>
