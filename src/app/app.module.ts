@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { FeedComponent } from './feed/feed.component';
 import { UserService } from './user.service';
+import { TweetComponent } from './tweet/tweet.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { UserService } from './user.service';
     SignupComponent,
     LandingComponent,
     FeedComponent,
+    TweetComponent
   ],
   imports: [
     BrowserModule,
