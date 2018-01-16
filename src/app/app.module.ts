@@ -12,6 +12,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { FeedComponent } from './feed/feed.component';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { FeedComponent } from './feed/feed.component';
     AppComponent,
     SignupComponent,
     LandingComponent,
-    FeedComponent
+    FeedComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,7 @@ import { FeedComponent } from './feed/feed.component';
     MatButtonModule,
     MatCardModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
