@@ -1,6 +1,6 @@
 <div class="signup-form">
   <form class="input-container">
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="full-width">
       <input matInput [(ngModel)]="user.email" name="email_input" placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="emailMatcher" required>
       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
         Please enter a valid email address
@@ -9,10 +9,10 @@
         Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="full-width">
         <input matInput [(ngModel)]="user.fullname" name="name_input" placeholder="Full Name">
       </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="full-width">
       <input matInput [(ngModel)]="user.username" name="username_input" placeholder="Username" [formControl]="usernameFormControl" [errorStateMatcher]="usernameMatcher" required>
       <mat-error *ngIf="usernameFormControl.hasError('alreadyExists') && !usernameFormControl.hasError('required')">
         This username already exists
@@ -21,7 +21,7 @@
         Username is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="full-width">
       <input matInput [(ngModel)]="user.password" name="password_input" placeholder="Password" [formControl]="passwordFormControl" [errorStateMatcher]="passwordMatcher" required>
       <mat-error *ngIf="passwordFormControl.hasError('required')">
         Password is <strong>required</strong>
