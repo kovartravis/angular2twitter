@@ -10,13 +10,22 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-        <input [(ngModel)]="user.fullname" name="name_input" matInput placeholder="Full Name">
+        <input matInput [(ngModel)]="user.fullname" name="name_input" placeholder="Full Name">
       </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input [(ngModel)]="user.username" name="username_input" matInput placeholder="Username">
+      <input matInput [(ngModel)]="user.username" name="username_input" placeholder="Username" [formControl]="usernameFormControl" [errorStateMatcher]="usernameMatcher" required>
+      <mat-error *ngIf="usernameFormControl.hasError('alreadyExists') && !usernameFormControl.hasError('required')">
+        This username already exists
+      </mat-error>
+      <mat-error *ngIf="usernameFormControl.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input [(ngModel)]="user.password" name="password_input" matInput placeholder="Password">
+      <input matInput [(ngModel)]="user.password" name="password_input" placeholder="Password" [formControl]="passwordFormControl" [errorStateMatcher]="passwordMatcher" required>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
     <div class="signup-buttons">
         <button (click)="signupButtonClicked()" mat-raised-button color="primary">Sign Up</button>

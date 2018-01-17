@@ -12,10 +12,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { FeedComponent } from './feed/feed.component';
+import { UserService } from './user.service';
 import { TweetComponent } from './tweet/tweet.component';
 import { LinkifyPipe } from './linkify.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
-
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     LandingComponent,
     FeedComponent,
     TweetComponent,
-    LinkifyPipe
+    LinkifyPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatCardModule,
     FlexLayoutModule,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
