@@ -14,6 +14,8 @@ import { LandingComponent } from './landing/landing.component';
 import { FeedComponent } from './feed/feed.component';
 import { TweetComponent } from './tweet/tweet.component';
 import { LinkifyPipe } from './linkify.pipe';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { LinkifyPipe } from './linkify.pipe';
     MatTabsModule,
     RouterModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
