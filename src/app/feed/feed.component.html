@@ -1,14 +1,20 @@
-<h2>
-  Some example material buttons, icon:
-</h2>
-<div>
-  <a mat-button color="primary">Flat button</a>
-  <a mat-raised-button color="accent">Raised button</a>
-  <a mat-fab color="primary">fab</a>
-  <a mat-mini-fab color="primary">mini</a>
-  <i class="material-icons">face</i>
-</div>
-<h2>My Feed</h2>
-<div class="tweets">
-  <app-tweet *ngFor="let item of tweets" [tweet]="item"></app-tweet>
+<div class="container" fxLayout="row" fxLayout.xs="column">
+  <div class="left-col" style="width: 200px; height: 300px; background-color: lightblue;">
+      userBlurb
+  </div>
+  <div class="main-col" fxLayout="column" fxFlex fxLayoutGap="10px" style="margin-left:10px;margin-right:10px;">
+    <h2 fxFlexAlign="center">Welcome to today's drama, username</h2>
+    <div class="tweet-add" fxLayout="column" fxFlex="170px" fxFlex.xs="170px">
+      <mat-form-field floatLabel="auto" hintLabel="(max 140 characters)">
+        <textarea #input matInput maxlength="140" placeholder="Add more drama!"
+          matTextareaAutosize matAutosizeMinRows="0" matAutosizeMaxRows="5"></textarea>
+        <mat-hint align="end">{{input.value?.length || 0}}/140</mat-hint>
+      </mat-form-field>
+      <!--<textarea fxFlexAlign="center" rows="2" style="min-height: 25px;min-width: 100px;" placeholder="Add more drama!"></textarea>-->
+      <button mat-raised-button color="primary" fxFlexAlign="center">Chirp!</button>
+    </div>
+    <div class="feed" fxLayoutGap="10px">
+      <app-tweet *ngFor="let item of tweets" [tweet]="item"></app-tweet>
+    </div>
+  </div>
 </div>

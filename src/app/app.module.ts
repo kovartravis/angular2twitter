@@ -15,6 +15,7 @@ import { FeedComponent } from './feed/feed.component';
 import { UserService } from './user.service';
 import { TweetComponent } from './tweet/tweet.component';
 import { LinkifyPipe } from './linkify.pipe';
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from './login/login.component';
 
 
@@ -40,7 +41,8 @@ import { LoginComponent } from './login/login.component';
     MatTabsModule,
     RouterModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    FlexLayoutModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
