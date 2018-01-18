@@ -1,0 +1,22 @@
+<mat-card class="user-blurb-card">
+  <!--<div mat-card-avatar fxFlexAlign="center">-->
+  <a href="/profile" class="user-blurb-top" fxLayout="column" fxLayoutAlign="center center">
+    <div class="circle">
+      <!--material icon "person" svg format, upsized-->
+      <svg fill="primary" height="72" viewBox="0 0 24 24" width="72" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+    </div>
+    <mat-card-title class="user-full-name">First Last</mat-card-title>
+    <mat-card-subtitle class="username">@username</mat-card-subtitle>
+  </a>
+  <div class="user-blurb-bottom" fxLayout="column" fxLayoutAlign="start center">
+    <div class="user-blurb-bottom-links" fxLayout="row" fxLayoutAlign="center start">
+        <button mat-button><p>Followers</p><p>0</p></button>
+        <button mat-button><p>Following</p><p>0</p></button>
+        <button mat-button><p>Mentions</p><p>0</p></button>
+    </div>
+    <mat-card-content fxLayoutAlign="center center">Joined: Jan 16, 2018, 2:57 PM</mat-card-content>
+  </div>
+</mat-card>

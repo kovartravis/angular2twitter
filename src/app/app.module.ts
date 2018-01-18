@@ -17,6 +17,7 @@ import { TweetComponent } from './tweet/tweet.component';
 import { LinkifyPipe } from './linkify.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from './login/login.component';
+import { UserBlurbComponent } from './user-blurb/user-blurb.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
     FeedComponent,
     TweetComponent,
     LinkifyPipe,
-    LoginComponent
+    LoginComponent,
+    UserBlurbComponent
   ],
   imports: [
     BrowserModule,
