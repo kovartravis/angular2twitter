@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   constructor(userService: UserService) { 
     this.userService = userService
     this.emailMatcher = new EmailErrorStateMatcher();
-    this.usernameMatcher = new UsernameErrorStateMatcher(this.userService);
+    this.usernameMatcher = new UsernameErrorStateMatcher();
     this.passwordMatcher = new PasswordErrorStateMatcher();
   }
 
@@ -36,10 +36,10 @@ export class SignupComponent implements OnInit {
       Validators.email,
     ]);
 
-    this.usernameFormControl = new FormControl('', [
-      Validators.required,
-      alreadyExistsNameValidator(this.userService)
-    ])
+    this.usernameFormControl = new FormControl('',
+     [Validators.required],
+     [alreadyExistsNameValidator(this.userService)]
+    )
 
     this.passwordFormControl = new FormControl('',[
       Validators.required

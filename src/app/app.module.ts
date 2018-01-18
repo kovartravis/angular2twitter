@@ -18,7 +18,7 @@ import { LinkifyPipe } from './linkify.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from './login/login.component';
 import { UserBlurbComponent } from './user-blurb/user-blurb.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,6 +45,7 @@ import { UserBlurbComponent } from './user-blurb/user-blurb.component';
     MatButtonModule,
     MatCardModule,
     FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
