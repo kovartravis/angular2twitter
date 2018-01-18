@@ -17,6 +17,7 @@ import { TweetComponent } from './tweet/tweet.component';
 import { LinkifyPipe } from './linkify.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     MatCardModule,
     FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
