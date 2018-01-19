@@ -1,8 +1,19 @@
-<nav mat-tab-nav-bar>
-    <a mat-tab-link routerLink="/signup" routerLinkActive="active">Sign Up</a>
-    <a mat-tab-link routerLink="/login" routerLinkActive="active">Login</a>
-    <a mat-tab-link routerLink="/landing" routerLinkActive="active">Landing</a>
-    <a mat-tab-link routerLink="/feed" routerLinkActive="active">Feed</a>
-</nav>
+<div [ngSwitch]="userLoggedIn.status">
+    <div *ngSwitchCase="false">
+        <nav mat-tab-nav-bar>
+            <a mat-tab-link routerLink="/signup" routerLinkActive="active">Sign Up</a>
+            <a mat-tab-link routerLink="/login" routerLinkActive="active">Login</a>
+            <a mat-tab-link routerLink="/landing" routerLinkActive="active">Landing</a>
+            <a mat-tab-link routerLink="/feed" routerLinkActive="active">Feed</a>
+        </nav>
+    </div>
+    <div *ngSwitchCase="true">
+        <nav mat-tab-nav-bar>
+            <button mat-tab-link>Sign Out</button>
+            <a mat-tab-link routerLink="/landing" routerLinkActive="active">Landing</a>
+            <a mat-tab-link routerLink="/feed" routerLinkActive="active">Feed</a>
+        </nav>
+    </div>
+</div>
 <router-outlet></router-outlet>
 

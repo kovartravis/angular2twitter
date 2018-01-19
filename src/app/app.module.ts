@@ -30,7 +30,7 @@ import { TweetService } from './tweet.service';
     TweetComponent,
     LinkifyPipe,
     LoginComponent,
-    UserBlurbComponent
+    UserBlurbComponent,
   ],
   imports: [
     BrowserModule,

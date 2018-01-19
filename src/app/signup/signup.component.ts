@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { EmailErrorStateMatcher, UsernameErrorStateMatcher, PasswordErrorStateMatcher } from '../error-states';
@@ -12,19 +12,20 @@ import { NewUser } from '../user'
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
+
 export class SignupComponent implements OnInit {
   
-  userService: UserService
+  userService: UserService;
 
-  emailMatcher: ErrorStateMatcher
-  usernameMatcher: ErrorStateMatcher
-  passwordMatcher: ErrorStateMatcher
+  emailMatcher: ErrorStateMatcher;
+  usernameMatcher: ErrorStateMatcher;
+  passwordMatcher: ErrorStateMatcher;
 
-  emailFormControl: FormControl
-  usernameFormControl: FormControl
-  passwordFormControl: FormControl
+  emailFormControl: FormControl;
+  usernameFormControl: FormControl;
+  passwordFormControl: FormControl;
 
-  serverError: string
+  serverError: string;
 
   constructor(userService: UserService) { 
     this.userService = userService
@@ -61,8 +62,12 @@ export class SignupComponent implements OnInit {
     if(this.emailFormControl.errors || this.usernameFormControl.errors || this.passwordFormControl.errors){
       console.log('Form Validation Error!')
     }else{
-      this.userService.postUser(this.user).subscribe( result => { console.log(result) }, error => { this.serverError = error.message })
+      this.userService.postUser(this.user).subscribe( result => { console.log(result); this.takeUserToFeedPage(); }, error => { this.serverError = error.message })
     }
+  }
+
+  takeUserToFeedPage(){
+    this.userService.onLoggedIn();
   }
 }
 
