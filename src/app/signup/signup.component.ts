@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { EmailErrorStateMatcher, UsernameErrorStateMatcher, PasswordErrorStateMatcher } from '../error-states';
 import { UserService } from '../user.service';
 import { alreadyExistsNameValidator } from '../validators'
+import { NewUser } from '../user'
 
 @Component({
   selector: 'app-signup',
@@ -23,11 +24,14 @@ export class SignupComponent implements OnInit {
   usernameFormControl: FormControl
   passwordFormControl: FormControl
 
+  serverError: string
+
   constructor(userService: UserService) { 
     this.userService = userService
     this.emailMatcher = new EmailErrorStateMatcher();
     this.usernameMatcher = new UsernameErrorStateMatcher();
     this.passwordMatcher = new PasswordErrorStateMatcher();
+    this.serverError = null;
   }
 
   ngOnInit() {
@@ -54,13 +58,12 @@ export class SignupComponent implements OnInit {
   }
 
   signupButtonClicked(){
-    console.log(this.user)
+    if(this.emailFormControl.errors || this.usernameFormControl.errors || this.passwordFormControl.errors){
+      console.log('Form Validation Error!')
+    }else{
+      this.userService.postUser(this.user).subscribe( result => { console.log(result) }, error => { this.serverError = error.message })
+    }
   }
 }
 
-interface NewUser{
-  email: string;
-  fullname: string;
-  username: string;
-  password: string;
-}
+

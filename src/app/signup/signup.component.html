@@ -30,5 +30,8 @@
     <div class="signup-buttons">
         <button (click)="signupButtonClicked()" mat-raised-button color="primary">Sign Up</button>
     </div>
+    <mat-error class="server-error" *ngIf="serverError">
+      {{serverError}}
+  </mat-error>
   </form>
 </div>
