@@ -19,6 +19,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from './login/login.component';
 import { UserBlurbComponent } from './user-blurb/user-blurb.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TweetService } from './tweet.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
     FlexLayoutModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, TweetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
