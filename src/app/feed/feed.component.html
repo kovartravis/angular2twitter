@@ -14,7 +14,7 @@
       <button mat-raised-button color="primary" fxFlexAlign="center" (click)="onClickChirp(input.value); input.value = ''">Chirp!</button>
     </div>
     <div class="feed" fxLayoutGap="10px">
-      <app-tweet *ngFor="let item of tweets" [tweet]="item"></app-tweet>
+      <app-tweet *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
     </div>
   </div>
 </div>

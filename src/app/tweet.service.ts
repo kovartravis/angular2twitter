@@ -59,5 +59,14 @@ export class TweetService {
         catchError(this.handleError<Tweet>(`getTweet id=${id}`))
       );
   }
+  /** DELETE tweet by id. */
+  deleteTweet(id: number): Observable<Tweet> {
+    const url = `${this.tweetsUrl}/${id}`;
+    return this.http.delete<Tweet>(url)
+      .pipe(
+        tap( tweet => this.log(`deleted tweet id=${tweet.id}`)),
+        catchError(this.handleError<Tweet>(`deleteTweet id=${id}`))
+      );
+  }
 
 }

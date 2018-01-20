@@ -24,7 +24,6 @@ export class FeedComponent implements OnInit {
       .subscribe(tweets => this.tweets = tweets);
   }
   onClickChirp(content: string): void {
-    console.log('onClickChirp, content: ' + content);
     content = content.trim();
     if (!content) { return; }
     this.tweetService.addTweet({
@@ -34,6 +33,12 @@ export class FeedComponent implements OnInit {
       .subscribe(tweet => {
         this.tweets.unshift(tweet);
       });
+  }
+  onTweetDeleted(tweet: Tweet): void {
+    const index = this.tweets.findIndex(x => tweet === x);
+    if (index !== -1) {
+      this.tweets.splice(index, 1);
+    }
   }
 
 
