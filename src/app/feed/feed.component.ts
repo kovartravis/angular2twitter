@@ -10,6 +10,8 @@ import { TweetService } from '../tweet.service';
 })
 export class FeedComponent implements OnInit {
   tweets: Tweet[];
+  // temporary hard-coded credentials
+  credentials = {username: 'cbrugger0', password: 'password'};
 
   constructor(private tweetService: TweetService) { }
 
@@ -20,6 +22,18 @@ export class FeedComponent implements OnInit {
   getTweets(): void {
     this.tweetService.getTweets()
       .subscribe(tweets => this.tweets = tweets);
+  }
+  onClickChirp(content: string): void {
+    console.log('onClickChirp, content: ' + content);
+    content = content.trim();
+    if (!content) { return; }
+    this.tweetService.addTweet({
+          credentials: this.credentials,
+          content
+        })
+      .subscribe(tweet => {
+        this.tweets.unshift(tweet);
+      });
   }
 
 
