@@ -4,6 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { AppConfig } from './app.config';
 import { Tweet } from './tweet';
 import { TweetDto } from './tweet-dto';
 
@@ -13,8 +14,7 @@ const httpOptions = {
 
 @Injectable()
 export class TweetService {
-  private tweetsUrl = 'http://localhost:8080/tweets';
-
+  private tweetsUrl = `${AppConfig.API_URL}/tweets`;
 
   constructor(private http: HttpClient) { }
 
