@@ -11,6 +11,6 @@ export class AppComponent {
   userLoggedIn: Log;
 
   constructor(private userService: UserService){
-    this.userLoggedIn = userService.userLoggedIn;
+
   }
 }

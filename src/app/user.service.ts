@@ -9,14 +9,31 @@ export class UserService {
 
   private UsersURL = 'http://localhost:8080'
 
-  userLoggedIn: Log;
+  private userLoggedIn: Log;
 
   constructor(private http: HttpClient) {
-    this.userLoggedIn = { status: false };
+    this.userLoggedIn = { status: false,
+                          credentials: null };
+  }
+
+  getUserLogStatus(){
+    return this.userLoggedIn.status;
+  }
+
+  getUsername(){
+    return this.userLoggedIn.credentials.username;
+  }
+
+  getCredentials(){
+    return this.userLoggedIn.credentials;
   }
 
   getUsernameExists(username: string): Observable<Boolean> {
     return this.http.get<Boolean>(this.UsersURL + '/validate/username/exists/@' + username)    
+  }
+
+  getCredentialsValid(creds: Credentials){
+    return this.http.post<Boolean>(this.UsersURL + '/validate/username/credentials', creds)
   }
 
   postUser(newUser: NewUser){
@@ -36,11 +53,13 @@ export class UserService {
     return this.http.post<User>(this.UsersURL + '/users', toServer)
   }
 
-  onLoggedIn(){
+  logIn(creds: Credentials){
     this.userLoggedIn.status = true;
+    this.userLoggedIn.credentials = creds;
   }
 }
 
 export interface Log{
   status: boolean;
+  credentials: Credentials;
 }

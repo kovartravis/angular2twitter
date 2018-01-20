@@ -1,4 +1,4 @@
-<div [ngSwitch]="userLoggedIn.status">
+<div [ngSwitch]="userService.getUserLogStatus()">
     <div *ngSwitchCase="false">
         <nav mat-tab-nav-bar>
             <a mat-tab-link routerLink="/signup" routerLinkActive="active">Sign Up</a>
@@ -9,9 +9,10 @@
     </div>
     <div *ngSwitchCase="true">
         <nav mat-tab-nav-bar>
-            <a mat-tab-link>Sign Out</a>
             <a mat-tab-link routerLink="/landing" routerLinkActive="active">Landing</a>
             <a mat-tab-link routerLink="/feed" routerLinkActive="active">Feed</a>
+            <a mat-tab-link>{{userService.getUsername()}}</a>
+            <a mat-tab-link>Sign Out</a>
         </nav>
     </div>
 </div>

@@ -4,7 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { EmailErrorStateMatcher, UsernameErrorStateMatcher, PasswordErrorStateMatcher } from '../error-states';
 import { UserService } from '../user.service';
 import { alreadyExistsNameValidator } from '../validators'
-import { NewUser } from '../user'
+import { NewUser, Credentials } from '../user'
 import { StateService } from '@uirouter/angular';
 import { Router } from '@angular/router';
 
@@ -16,15 +16,22 @@ import { Router } from '@angular/router';
 
 export class SignupComponent implements OnInit {
 
-  emailMatcher: ErrorStateMatcher;
-  usernameMatcher: ErrorStateMatcher;
-  passwordMatcher: ErrorStateMatcher;
+  private emailMatcher: ErrorStateMatcher;
+  private usernameMatcher: ErrorStateMatcher;
+  private passwordMatcher: ErrorStateMatcher;
 
-  emailFormControl: FormControl;
-  usernameFormControl: FormControl;
-  passwordFormControl: FormControl;
+  private emailFormControl: FormControl;
+  private usernameFormControl: FormControl;
+  private passwordFormControl: FormControl;
 
-  serverError: string;
+  private serverError: string;
+
+  private user: NewUser = {
+    email: '',
+    fullname: '',
+    username: '',
+    password: ''
+  }
 
   constructor(private userService: UserService, private state$: Router) { 
     this.emailMatcher = new EmailErrorStateMatcher();
@@ -49,13 +56,6 @@ export class SignupComponent implements OnInit {
     ])
   }
 
-  user: NewUser = {
-    email: '',
-    fullname: '',
-    username: '',
-    password: ''
-  }
-
   signupButtonClicked(){
     if(this.emailFormControl.errors || this.usernameFormControl.errors || this.passwordFormControl.errors){
       console.log('Form Validation Error!')
@@ -65,7 +65,7 @@ export class SignupComponent implements OnInit {
   }
 
   takeUserToFeedPage(){
-    this.userService.onLoggedIn();
+    this.userService.logIn({ username: this.user.username, password: this.user.password });
     this.state$.navigateByUrl('/feed')
   }
 }

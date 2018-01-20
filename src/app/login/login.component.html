@@ -1,16 +1,19 @@
 <div class="login-form">
   <form class="input-container">
     <mat-form-field class="full-width">
-      <input matInput placeholder="Username" name="username_input">
+      <input matInput [(ngModel)]="user.username" placeholder="Username" name="username_input">
     </mat-form-field>
     <mat-form-field class="full-width">
-        <input matInput placeholder="Password" name="password_input">
+        <input matInput [(ngModel)]="user.password" placeholder="Password" name="password_input">
       </mat-form-field>
     <div class="signup-buttons">
         <button (click)="loginButtonClicked()" mat-raised-button color="primary">Log In</button>
     </div>
     <mat-error class="login-error" *ngIf="invalidLoginAttempt">
         username or password invalid
+    </mat-error>
+    <mat-error class="login-error" *ngIf="serverError">
+        {{serverError}}
     </mat-error>
   </form>
 </div>
