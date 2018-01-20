@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 
 import { Tweet } from '../tweet';
+import { TweetService } from '../tweet.service';
 
 @Component({
   selector: 'app-tweet',
@@ -9,10 +10,18 @@ import { Tweet } from '../tweet';
 })
 export class TweetComponent implements OnInit {
   @Input() tweet: Tweet;
+  @Output() tweetDeleted: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private tweetService: TweetService) { }
 
   ngOnInit() {
+  }
+  deleteTweet(tweet: Tweet) {
+    console.log(tweet);
+    this.tweetService.deleteTweet(tweet.id)
+      .subscribe(() => {
+        this.tweetDeleted.emit(tweet);
+      });
   }
 
 }

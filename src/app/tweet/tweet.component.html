@@ -12,7 +12,7 @@
       <button mat-raised-button color="accent">likes</button>
       <button mat-raised-button color="accent">replies</button>
       <button mat-raised-button color="accent">reposts</button>
-      <button mat-raised-button color="accent">delete</button>
+      <button mat-raised-button color="accent" (click)="deleteTweet(tweet)">delete</button>
     </mat-card-actions>
     <mat-card-footer class="tweet-card-footer" align="center">posted: {{tweet.posted | date:'medium'}}</mat-card-footer>
   </mat-card>
