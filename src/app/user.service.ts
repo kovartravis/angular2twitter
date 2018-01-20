@@ -8,14 +8,12 @@ import { NewUser, User, ServerFormattedUser, Credentials, Profile } from './user
 export class UserService {
 
   private UsersURL = 'http://localhost:8080'
-  private componentMethodCallSource = new Subject<any>();
-  loginEvent$ = this.componentMethodCallSource.asObservable();
 
   userLoggedIn: Log;
 
   constructor(private http: HttpClient) {
-    this.userLoggedIn = {status: false};
-   }
+    this.userLoggedIn = { status: false };
+  }
 
   getUsernameExists(username: string): Observable<Boolean> {
     return this.http.get<Boolean>(this.UsersURL + '/validate/username/exists/@' + username)    
@@ -40,7 +38,6 @@ export class UserService {
 
   onLoggedIn(){
     this.userLoggedIn.status = true;
-    this.componentMethodCallSource.next();
   }
 }
 

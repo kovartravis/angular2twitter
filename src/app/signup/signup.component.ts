@@ -5,17 +5,16 @@ import { EmailErrorStateMatcher, UsernameErrorStateMatcher, PasswordErrorStateMa
 import { UserService } from '../user.service';
 import { alreadyExistsNameValidator } from '../validators'
 import { NewUser } from '../user'
+import { StateService } from '@uirouter/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  providers: [UserService],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 
 export class SignupComponent implements OnInit {
-  
-  userService: UserService;
 
   emailMatcher: ErrorStateMatcher;
   usernameMatcher: ErrorStateMatcher;
@@ -27,8 +26,7 @@ export class SignupComponent implements OnInit {
 
   serverError: string;
 
-  constructor(userService: UserService) { 
-    this.userService = userService
+  constructor(private userService: UserService, private state$: Router) { 
     this.emailMatcher = new EmailErrorStateMatcher();
     this.usernameMatcher = new UsernameErrorStateMatcher();
     this.passwordMatcher = new PasswordErrorStateMatcher();
@@ -68,6 +66,7 @@ export class SignupComponent implements OnInit {
 
   takeUserToFeedPage(){
     this.userService.onLoggedIn();
+    this.state$.navigateByUrl('/feed')
   }
 }
 
