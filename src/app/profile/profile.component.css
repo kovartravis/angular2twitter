@@ -1,0 +1,8 @@
+.center{
+    width: 60%;
+}
+
+.profile-buttons{
+    display: flex;
+    flex-direction: column;
+}

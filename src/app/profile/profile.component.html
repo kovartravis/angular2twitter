@@ -1,3 +1,20 @@
-<p>
-  Hello {{username}}!
-</p>
+<div class="profile" fxLayout="row" fxLayout.xs="column">
+  <div class="left">
+    <app-user-blurb></app-user-blurb>
+    <div [ngSwitch]="thisIsMyProfile">
+      <div *ngSwitchCase="true" class="profile-buttons">
+          <button mat-raised-button (click)="clickEditProfile()">Edit Profile</button>
+          <button mat-raised-button (click)="clickFollow()">**Mockup** Follow</button>
+      </div>
+      <div *ngSwitchCase="false" class="profile-buttons">
+          <button mat-raised-button (click)="clickFollow()">**Mockup** Follow</button>
+      </div>
+    </div>
+  </div>
+  <div class="center">
+      <app-tweet *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
+  </div>
+  <div class="right">
+    <p>space for the future</p>
+  </div>
+</div>

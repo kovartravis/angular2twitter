@@ -21,7 +21,11 @@ export class UserService {
   }
 
   getUsername(): string {
-    return this.userLoggedIn.credentials.username;
+    if(this.getUserLogStatus()){
+      return this.userLoggedIn.credentials.username;
+    }else{
+      return null;
+    }
   }
 
   getCredentials(): Credentials {
