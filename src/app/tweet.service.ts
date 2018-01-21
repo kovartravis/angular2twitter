@@ -42,6 +42,7 @@ export class TweetService {
       return of(result as T);
     };
   }
+  /** GET: get all tweets */
   getTweets(): Observable<Tweet[]> {
     return this.http.get<Tweet[]>(this.tweetsUrl)
       .pipe(
@@ -86,6 +87,46 @@ export class TweetService {
       .pipe(
         tap(() => this.log(`liked tweet id=${id}`)),
         catchError(this.handleError<Tweet>('likeTweet'))
+      );
+  }
+  /** POST: reply to a tweet */
+  replyToTweet (id: number, content: string): Observable<Tweet> {
+    const url = `${this.tweetsUrl}/${id}/reply`;
+    const tweetDto: TweetDto = {
+      credentials: this.credentials,
+      content
+    };
+    return this.http.post<Tweet>(url, tweetDto, httpOptions)
+      .pipe(
+        tap((tweet: Tweet) => this.log(`replied to tweet, reply id=${tweet.id}`)),
+        catchError(this.handleError<Tweet>('replyToTweet'))
+      );
+  }
+  /** POST: repost a tweet */
+  repostTweet (id: number): Observable<Tweet> {
+    const url = `${this.tweetsUrl}/${id}/repost`;
+    return this.http.post<Tweet>(url, this.credentials, httpOptions)
+      .pipe(
+        tap((tweet: Tweet) => this.log(`replosted tweet, repost id=${tweet.id}`)),
+        catchError(this.handleError<Tweet>('repostTweet'))
+      );
+  }
+  /** GET: get all replies for a tweets */
+  getReplies(id: number): Observable<Tweet[]> {
+    const url = `${this.tweetsUrl}/${id}/replies`;
+    return this.http.get<Tweet[]>(url)
+      .pipe(
+        tap(() => this.log('fetched replies')),
+        catchError(this.handleError('getReplies', []))
+      );
+  }
+  /** GET: get all reposts for a tweets */
+  getReposts(id: number): Observable<Tweet[]> {
+    const url = `${this.tweetsUrl}/${id}/reposts`;
+    return this.http.get<Tweet[]>(url)
+      .pipe(
+        tap(() => this.log('fetched reposts')),
+        catchError(this.handleError('getReposts', []))
       );
   }
 
