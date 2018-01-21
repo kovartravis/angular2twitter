@@ -20,6 +20,8 @@ import { LoginComponent } from './login/login.component';
 import { UserBlurbComponent } from './user-blurb/user-blurb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TweetService } from './tweet.service';
+import { ProfileComponent } from './profile/profile.component';
+import { SignoutComponent } from './signout/signout.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { TweetService } from './tweet.service';
     LinkifyPipe,
     LoginComponent,
     UserBlurbComponent,
+    ProfileComponent,
+    SignoutComponent,
   ],
   imports: [
     BrowserModule,

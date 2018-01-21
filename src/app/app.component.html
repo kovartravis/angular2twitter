@@ -11,8 +11,8 @@
         <nav mat-tab-nav-bar>
             <a mat-tab-link routerLink="/landing" routerLinkActive="active">Landing</a>
             <a mat-tab-link routerLink="/feed" routerLinkActive="active">Feed</a>
-            <a mat-tab-link>{{userService.getUsername()}}</a>
-            <a mat-tab-link>Sign Out</a>
+            <a mat-tab-link [routerLink]="['/profile', userService.getUsername()]" routerLinkActive="active">@{{userService.getUsername()}}</a>
+            <a mat-tab-link routerLink="/signout" routerLinkActive="active">Sign Out</a>
         </nav>
     </div>
 </div>

@@ -16,15 +16,15 @@ export class UserService {
                           credentials: null };
   }
 
-  getUserLogStatus(){
+  getUserLogStatus(): boolean {
     return this.userLoggedIn.status;
   }
 
-  getUsername(){
+  getUsername(): string {
     return this.userLoggedIn.credentials.username;
   }
 
-  getCredentials(){
+  getCredentials(): Credentials {
     return this.userLoggedIn.credentials;
   }
 
@@ -32,11 +32,11 @@ export class UserService {
     return this.http.get<Boolean>(this.UsersURL + '/validate/username/exists/@' + username)    
   }
 
-  getCredentialsValid(creds: Credentials){
+  getCredentialsValid(creds: Credentials): Observable<Boolean> {
     return this.http.post<Boolean>(this.UsersURL + '/validate/username/credentials', creds)
   }
 
-  postUser(newUser: NewUser){
+  postUser(newUser: NewUser): Observable<User> {
     var toServer: ServerFormattedUser;
     var credentials: Credentials;
     var profile: Profile;
@@ -56,6 +56,11 @@ export class UserService {
   logIn(creds: Credentials){
     this.userLoggedIn.status = true;
     this.userLoggedIn.credentials = creds;
+  }
+
+  logOut(){
+    this.userLoggedIn.status = false;
+    this.userLoggedIn.credentials = null;
   }
 }
 
