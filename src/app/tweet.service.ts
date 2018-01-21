@@ -12,9 +12,16 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+interface Credentials {
+  username: string;
+  password: string;
+}
+
 @Injectable()
 export class TweetService {
   private tweetsUrl = `${AppConfig.API_URL}/tweets`;
+  // temporary hard-coded credentials
+  credentials = {username: 'cbrugger0', password: 'password'};
 
   constructor(private http: HttpClient) { }
 
@@ -43,7 +50,11 @@ export class TweetService {
       );
   }
   /** POST: add a new tweet */
-  addTweet (tweetDto: TweetDto): Observable<Tweet> {
+  addTweet (content: string): Observable<Tweet> {
+    const tweetDto: TweetDto = {
+      credentials: this.credentials,
+      content
+    };
     return this.http.post<Tweet>(this.tweetsUrl, tweetDto, httpOptions)
       .pipe(
         tap((tweet: Tweet) => this.log(`added tweet id=${tweet.id}`)),
@@ -66,6 +77,15 @@ export class TweetService {
       .pipe(
         tap( tweet => this.log(`deleted tweet id=${tweet.id}`)),
         catchError(this.handleError<Tweet>(`deleteTweet id=${id}`))
+      );
+  }
+  /** POST: like a tweet */
+  likeTweet (id: number): Observable<any> {
+    const url = `${this.tweetsUrl}/${id}/like`;
+    return this.http.post(url, this.credentials, httpOptions)
+      .pipe(
+        tap(() => this.log(`liked tweet id=${id}`)),
+        catchError(this.handleError<Tweet>('likeTweet'))
       );
   }
 

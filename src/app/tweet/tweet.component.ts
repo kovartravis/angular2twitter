@@ -17,11 +17,16 @@ export class TweetComponent implements OnInit {
   ngOnInit() {
   }
   deleteTweet(tweet: Tweet) {
-    console.log(tweet);
     this.tweetService.deleteTweet(tweet.id)
       .subscribe(() => {
         this.tweetDeleted.emit(tweet);
       });
+  }
+  likeTweet(tweet: Tweet) {
+    this.tweetService.likeTweet(tweet.id)
+    // TODO: indicate visually that tweet has been liked
+    // TODO: handled already liked tweet error with alert
+      .subscribe();
   }
 
 }
