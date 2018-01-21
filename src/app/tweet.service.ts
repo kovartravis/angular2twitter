@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { Tweet } from './tweet';
 import { TweetDto } from './tweet-dto';
+import {User} from './user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -127,6 +128,24 @@ export class TweetService {
       .pipe(
         tap(() => this.log('fetched reposts')),
         catchError(this.handleError('getReposts', []))
+      );
+  }
+  /** GET: get all likes (users) for a tweets */
+  getLikes(id: number): Observable<User[]> {
+    const url = `${this.tweetsUrl}/${id}/likes`;
+    return this.http.get<User[]>(url)
+      .pipe(
+        tap(() => this.log('fetched likes')),
+        catchError(this.handleError('getLikes', []))
+      );
+  }
+  /** GET: get all mentions (users) for a tweets */
+  getMentions(id: number): Observable<User[]> {
+    const url = `${this.tweetsUrl}/${id}/mentions`;
+    return this.http.get<User[]>(url)
+      .pipe(
+        tap(() => this.log('fetched mentions')),
+        catchError(this.handleError('getMentions', []))
       );
   }
 
