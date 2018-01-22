@@ -17,8 +17,10 @@ export class FeedComponent implements OnInit {
   constructor(private userService: UserService, private tweetService: TweetService) { }
 
   ngOnInit() {
-    this.user = this.userService.getUser();
-    this.getTweets();
+    if (this.userService.getUserLogStatus()) {
+      setTimeout( () => this.user = this.userService.getUser() );
+      this.getTweets();
+    }
   }
 
   getTweets(): void {

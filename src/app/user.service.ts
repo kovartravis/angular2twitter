@@ -11,6 +11,7 @@ export class UserService {
   private UsersURL = 'http://localhost:8080';
 
   private userLoggedIn: Log;
+  private wait = false;
 
   constructor(private http: HttpClient) {
     this.userLoggedIn = { status: false, credentials: undefined, user: undefined };
@@ -44,13 +45,12 @@ export class UserService {
       getUser returns the whole user object which may or may not be undefined
   */
   getUser(): User {
-    return this.userLoggedIn.user;
+    return this.getUserLogStatus() ? this.userLoggedIn.user : undefined;
   }
 
   /*
       getOtherUser returns another user as an observable that returns a user
   */
-
   getOtherUser(user: string): Observable<User> {
     return this.http.get<User>(this.UsersURL + '/users/@' + user);
   }
@@ -318,7 +318,8 @@ export class UserService {
   logIn(creds: Credentials) {
     this.userLoggedIn.status = true;
     this.userLoggedIn.credentials = creds;
-    this.http.get<User>(this.UsersURL + '/users/@' + creds.username).subscribe(result => { this.userLoggedIn.user = result; });
+    this.http.get<User>(this.UsersURL + '/users/@' + creds.username).subscribe(result => {
+                                                         this.userLoggedIn.user = result; });
   }
 
   /*
