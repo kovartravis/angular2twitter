@@ -8,6 +8,8 @@ import { AppConfig } from './app.config';
 import { Tweet } from './tweet';
 import { TweetDto } from './tweet-dto';
 import {User} from './user';
+import {Hashtag} from './hashtag';
+import {Context} from './context';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -118,7 +120,7 @@ export class TweetService {
     return this.http.get<Tweet[]>(url)
       .pipe(
         tap(() => this.log('fetched replies')),
-        catchError(this.handleError('getReplies', []))
+        catchError(this.handleError<Tweet[]>('getReplies', []))
       );
   }
   /** GET: get all reposts for a tweets */
@@ -127,7 +129,7 @@ export class TweetService {
     return this.http.get<Tweet[]>(url)
       .pipe(
         tap(() => this.log('fetched reposts')),
-        catchError(this.handleError('getReposts', []))
+        catchError(this.handleError<Tweet[]>('getReposts', []))
       );
   }
   /** GET: get all likes (users) for a tweets */
@@ -136,7 +138,7 @@ export class TweetService {
     return this.http.get<User[]>(url)
       .pipe(
         tap(() => this.log('fetched likes')),
-        catchError(this.handleError('getLikes', []))
+        catchError(this.handleError<User[]>('getLikes', []))
       );
   }
   /** GET: get all mentions (users) for a tweets */
@@ -145,7 +147,25 @@ export class TweetService {
     return this.http.get<User[]>(url)
       .pipe(
         tap(() => this.log('fetched mentions')),
-        catchError(this.handleError('getMentions', []))
+        catchError(this.handleError<User[]>('getMentions', []))
+      );
+  }
+  /** GET: get all tags associated with a tweets */
+  getTags(id: number): Observable<Hashtag[]> {
+    const url = `${this.tweetsUrl}/${id}/tags`;
+    return this.http.get<Hashtag[]>(url)
+      .pipe(
+        tap(() => this.log('fetched tags')),
+        catchError(this.handleError<Hashtag[]>('getTags', []))
+      );
+  }
+  /** GET: get context for a tweets */
+  getContext(id: number): Observable<Context> {
+    const url = `${this.tweetsUrl}/${id}/context`;
+    return this.http.get<Context>(url)
+      .pipe(
+        tap(() => this.log('fetched context')),
+        catchError(this.handleError<Context>('getContext')
       );
   }
 
