@@ -13,7 +13,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.userLoggedIn = { status: false,
-                          credentials: null };
+                          credentials: null,
+                          profile: null };
   }
 
   getUserLogStatus(): boolean {
@@ -26,6 +27,10 @@ export class UserService {
     }else{
       return null;
     }
+  }
+
+  getProfile(): Profile {
+    return this.userLoggedIn.profile; 
   }
 
   getCredentials(): Credentials {
@@ -45,13 +50,18 @@ export class UserService {
     var credentials: Credentials;
     var profile: Profile;
 
+    var name = newUser.fullname.split(' ');
+
     toServer = {
       credentials:{
         username: newUser.username,
         password: newUser.password
       },
       profile:{
-        email:newUser.email
+        email:newUser.email,
+        firstName: name[0],
+        lastName: name[1],
+        phone: null
       }
     }
     return this.http.post<User>(this.UsersURL + '/users', toServer)
@@ -60,6 +70,7 @@ export class UserService {
   logIn(creds: Credentials){
     this.userLoggedIn.status = true;
     this.userLoggedIn.credentials = creds;
+    this.http.get<User>(this.UsersURL + '/users/@' + creds.username).subscribe( result => {this.userLoggedIn.profile = result.profile} );
   }
 
   logOut(){
@@ -71,4 +82,5 @@ export class UserService {
 export interface Log{
   status: boolean;
   credentials: Credentials;
+  profile: Profile;
 }

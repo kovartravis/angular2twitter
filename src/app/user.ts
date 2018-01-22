@@ -1,12 +1,7 @@
 export class User {
   username: string;
   joined: number;
-  profile: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-  };
+  profile: Profile;
 }
 
 export class NewUser{
@@ -23,6 +18,9 @@ export class Credentials{
 
 export class Profile{
   email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
 }
 
 export class ServerFormattedUser{

@@ -20,8 +20,9 @@ import { LoginComponent } from './login/login.component';
 import { UserBlurbComponent } from './user-blurb/user-blurb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TweetService } from './tweet.service';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent, DialogOverviewExampleDialog } from './profile/profile.component';
 import { SignoutComponent } from './signout/signout.component';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SignoutComponent } from './signout/signout.component';
     UserBlurbComponent,
     ProfileComponent,
     SignoutComponent,
+    DialogOverviewExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -50,8 +52,10 @@ import { SignoutComponent } from './signout/signout.component';
     MatButtonModule,
     MatCardModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
+  entryComponents: [DialogOverviewExampleDialog],
   providers: [UserService, TweetService],
   bootstrap: [AppComponent]
 })

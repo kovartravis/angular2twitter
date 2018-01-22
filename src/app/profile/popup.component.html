@@ -1,0 +1,19 @@
+<div class="profile-edit-form">
+    <div class="form-input">
+        <mat-form-field class="full width">
+            <input matInput placeholder="Email" [(ngModel)]="profile.email">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="First Name" [(ngModel)]="profile.firstName">
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput placeholder="Last Name" [(ngModel)]="profile.lastName">
+            </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Phone Number" [(ngModel)]="profile.phone">
+        </mat-form-field>
+    </div>
+    <div class="form-buttons">
+        <button mat-raised-button (click)="onClick()">Save Changes</button>
+    </div>
+</div>
