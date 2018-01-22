@@ -41,14 +41,18 @@ export class UserService {
   }
 
   /*
-      getUser returns the whole user object which may or may not be undefined, or an optional user can be supplied to
-    access another users data which returns an observable that returns a user.
+      getUser returns the whole user object which may or may not be undefined
   */
-  getUser(optionalUser?: string): Observable<User> | User {
-    if (optionalUser) {
-      return this.http.get<User>(this.UsersURL + '/users/@' + optionalUser);
-    }
+  getUser(): User {
     return this.userLoggedIn.user;
+  }
+
+  /*
+      getOtherUser returns another user as an observable that returns a user
+  */
+
+  getOtherUser(user: string): Observable<User> {
+    return this.http.get<User>(this.UsersURL + '/users/@' + user);
   }
 
   /*
