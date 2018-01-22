@@ -246,6 +246,24 @@ export class UserService {
   }
 
   /*
+      deleteUser deletes an existing user.
+
+      arguments: none.
+
+      return: returns an observable that returns the deleted user object.
+
+      error: 404 - UserDoesNotExistException
+             401 - CredentialsDoNotMatchException
+  */
+  deleteUser(): Observable<User> {
+    if(!this.getUserLogStatus()){
+      console.log('ERROR: tried to delete user but no user is logged in')
+      return undefined;
+    }
+    return this.http.post<User>(this.UsersURL + '/@' + this.getUsername(), this.getCredentials())
+  }
+  
+  /*
       postFollowUser posts to the apit endpoint '/users/@username/follow' to set the logged in user to be following the username supplied in the arguments.
 
       arguments: you must supply the username of the user that you want to follow.
