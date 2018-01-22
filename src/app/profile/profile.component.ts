@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   private profile: Profile
   sub: any;
 
-  constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
