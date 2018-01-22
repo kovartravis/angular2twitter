@@ -165,7 +165,7 @@ export class TweetService {
     return this.http.get<Context>(url)
       .pipe(
         tap(() => this.log('fetched context')),
-        catchError(this.handleError<Context>('getContext')
+        catchError(this.handleError<Context>('getContext'))
       );
   }
 
