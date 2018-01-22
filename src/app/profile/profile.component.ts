@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
 
   private username: string;
   private thisIsMyProfile: boolean;
-  private profile: Profile
+  private profile: Profile;
   sub: any;
 
   constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) {}
@@ -21,44 +21,44 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.username = params['username'];
-      if(this.username.match(this.userService.getUsername())){
+      if (this.username.match(this.userService.getUsername())) {
         this.thisIsMyProfile = true;
         this.profile = this.userService.getProfile();
-      }else{
+      } else {
         this.thisIsMyProfile = false;
       }
-    })
+    });
   }
 
-  openDialogEditProfile(){
-    let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+  openDialogEditProfile() {
+    const dialogRef = this.dialog.open(ProfileEditPopupComponent, {
       width: '250px',
       data: { profile: this.profile }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(result)
-      //this.profile = result;
+      console.log(result);
+      // this.profile = result;
     });
   }
 
-  clickFollow(){
-    console.log('this needs to check whether you are following them or not')
+  clickFollow() {
+    console.log('this needs to check whether you are following them or not');
   }
 }
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
+  selector: 'app-dialog-profile',
   templateUrl: 'popup.component.html'
 })
-export class DialogOverviewExampleDialog {
+export class ProfileEditPopupComponent {
 
   private profile: Profile;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
+    public dialogRef: MatDialogRef<ProfileEditPopupComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
       this.profile = data.profile;
     }
 

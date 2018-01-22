@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   private user: Credentials = {
     username: '',
     password: ''
-  }
+  };
 
   constructor(private userService: UserService, private state$: Router) {
     this.invalidLoginAttempt = false;
@@ -24,18 +24,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  loginButtonClicked(){
+  loginButtonClicked() {
     this.serverError = '';
-    this.userService.getCredentialsValid(this.user).subscribe( result => { if(result){ this.takeUserToFeedPage() }
-                                                                           else{ this.invalidLoginAttempt = true }
+    this.userService.getCredentialsValid(this.user).subscribe( result => { if (result) { this.takeUserToFeedPage();
+                                                                         } else { this.invalidLoginAttempt = true; }
                                                                          }, error => {
                                                                            this.serverError = error.message;
-                                                                         })
+                                                                         });
   }
 
-  takeUserToFeedPage(){
+  takeUserToFeedPage() {
     this.userService.logIn(this.user);
-    this.state$.navigateByUrl('/feed')
+    this.state$.navigateByUrl('/feed');
   }
 }
 

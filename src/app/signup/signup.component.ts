@@ -31,9 +31,9 @@ export class SignupComponent implements OnInit {
     fullname: '',
     username: '',
     password: ''
-  }
+  };
 
-  constructor(private userService: UserService, private state$: Router) { 
+  constructor(private userService: UserService, private state$: Router) {
     this.emailMatcher = new EmailErrorStateMatcher();
     this.usernameMatcher = new UsernameErrorStateMatcher();
     this.passwordMatcher = new PasswordErrorStateMatcher();
@@ -49,24 +49,25 @@ export class SignupComponent implements OnInit {
     this.usernameFormControl = new FormControl('',
      [Validators.required],
      [alreadyExistsNameValidator(this.userService)]
-    )
+    );
 
     this.passwordFormControl = new FormControl('',[
       Validators.required
-    ])
+    ]);
   }
 
   signupButtonClicked(){
-    if(this.emailFormControl.errors || this.usernameFormControl.errors || this.passwordFormControl.errors){
-      console.log('Form Validation Error!')
-    }else{
-      this.userService.postUser(this.user).subscribe( result => { console.log(result); this.takeUserToFeedPage(); }, error => { this.serverError = error.message })
+    if (this.emailFormControl.errors || this.usernameFormControl.errors || this.passwordFormControl.errors) {
+      console.log('Form Validation Error!');
+    } else {
+      this.userService.postUser(this.user).subscribe( result => {
+                                 console.log(result); this.takeUserToFeedPage(); }, error => { this.serverError = error.message; });
     }
   }
 
-  takeUserToFeedPage(){
+  takeUserToFeedPage() {
     this.userService.logIn({ username: this.user.username, password: this.user.password });
-    this.state$.navigateByUrl('/feed')
+    this.state$.navigateByUrl('/feed');
   }
 }
 

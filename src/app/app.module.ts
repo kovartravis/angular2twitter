@@ -15,12 +15,12 @@ import { FeedComponent } from './feed/feed.component';
 import { UserService } from './user.service';
 import { TweetComponent } from './tweet/tweet.component';
 import { LinkifyPipe } from './linkify.pipe';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { UserBlurbComponent } from './user-blurb/user-blurb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TweetService } from './tweet.service';
-import { ProfileComponent, DialogOverviewExampleDialog } from './profile/profile.component';
+import { ProfileComponent, ProfileEditPopupComponent } from './profile/profile.component';
 import { SignoutComponent } from './signout/signout.component';
 import { MatDialogModule } from '@angular/material';
 
@@ -36,7 +36,7 @@ import { MatDialogModule } from '@angular/material';
     UserBlurbComponent,
     ProfileComponent,
     SignoutComponent,
-    DialogOverviewExampleDialog
+    ProfileEditPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +55,7 @@ import { MatDialogModule } from '@angular/material';
     HttpClientModule,
     MatDialogModule
   ],
-  entryComponents: [DialogOverviewExampleDialog],
+  entryComponents: [ProfileEditPopupComponent],
   providers: [UserService, TweetService],
   bootstrap: [AppComponent]
 })

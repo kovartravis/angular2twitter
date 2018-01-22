@@ -11,7 +11,7 @@ export class SignoutComponent implements OnInit {
 
   constructor(private state$: Router, service: UserService) {
     service.logOut();
-    state$.navigateByUrl('/landing')
+    state$.navigateByUrl('/landing');
 
    }
 

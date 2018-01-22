@@ -41,10 +41,10 @@ export class UserService {
   }
 
   /*
-      getUser returns the whole user object which may or may not be undefined, or an optional user can be supplied to 
-    access another users data.
+      getUser returns the whole user object which may or may not be undefined, or an optional user can be supplied to
+    access another users data which returns an observable that returns a user.
   */
-  getUser(optionalUser?: string): User | Observable<User> {
+  getUser(optionalUser?: string): Observable<User> | User {
     if (optionalUser) {
       return this.http.get<User>(this.UsersURL + '/users/@' + optionalUser);
     }
@@ -74,7 +74,7 @@ export class UserService {
       return: returns an observable that returns a boolean indicating whether or not the username exists on the server.
   */
   getUsernameExists(username: string): Observable<Boolean> {
-    return this.http.get<Boolean>(this.UsersURL + '/validate/username/exists/@' + username)
+    return this.http.get<Boolean>(this.UsersURL + '/validate/username/exists/@' + username);
   }
 
   /*
@@ -88,7 +88,7 @@ export class UserService {
       return: returns an observable that returns a boolean indicating whether or not the supplied credentials are valid or not.
   */
   getCredentialsValid(creds: Credentials): Observable<Boolean> {
-    return this.http.post<Boolean>(this.UsersURL + '/validate/username/credentials', creds)
+    return this.http.post<Boolean>(this.UsersURL + '/validate/username/credentials', creds);
   }
 
   /*
@@ -105,12 +105,12 @@ export class UserService {
   */
   getFeed(optionalUser?: string): Observable<Tweet[]> {
     if (!this.getUserLogStatus() && !optionalUser) {
-      console.log('ERROR: tried to access feed but no user is logged in and no arguments supplied')
+      console.log('ERROR: tried to access feed but no user is logged in and no arguments supplied');
       return undefined;
     } else if (optionalUser) {
-      return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + optionalUser + '/feed')
+      return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + optionalUser + '/feed');
     }
-    return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/feed')
+    return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/feed');
   }
 
   /*
@@ -124,14 +124,14 @@ export class UserService {
 
       error: 404 - UserNotFound
   */
-  getTweets(optionalUser = undefined): Observable<Tweet[]> {
+  getTweets(optionalUser?: string): Observable<Tweet[]> {
     if (!this.getUserLogStatus() && !optionalUser) {
-      console.log('ERROR: tried to access tweets but no user is logged in and no arguments supplied')
+      console.log('ERROR: tried to access tweets but no user is logged in and no arguments supplied');
       return undefined;
     } else if (optionalUser) {
-      return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + optionalUser + '/tweets')
+      return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + optionalUser + '/tweets');
     }
-    return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/tweets')
+    return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/tweets');
   }
 
   /*
@@ -145,14 +145,14 @@ export class UserService {
 
       error: 404 - UserNotFound
   */
-  getMentions(optionalUser = undefined): Observable<Tweet[]> {
+  getMentions(optionalUser?: string): Observable<Tweet[]> {
     if (!this.getUserLogStatus() && !optionalUser) {
-      console.log('ERROR: tried to access mentions but no user is logged in and no arguments supplied')
+      console.log('ERROR: tried to access mentions but no user is logged in and no arguments supplied');
       return undefined;
     } else if (optionalUser) {
-      return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + optionalUser + '/mentions')
+      return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + optionalUser + '/mentions');
     }
-    return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/mentions')
+    return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/mentions');
   }
 
   /*
@@ -166,14 +166,14 @@ export class UserService {
 
       error: 404 - UserNotFound
   */
-  getFollowing(optionalUser = undefined): Observable<User[]> {
+  getFollowing(optionalUser?: string): Observable<User[]> {
     if (!this.getUserLogStatus() && !optionalUser) {
       console.log('ERROR: tried to access followers but no user is logged in and no arguments supplied');
       return undefined;
     } else if (optionalUser) {
-      return this.http.get<User[]>(this.UsersURL + '/users/@' + optionalUser + '/following')
+      return this.http.get<User[]>(this.UsersURL + '/users/@' + optionalUser + '/following');
     }
-    return this.http.get<User[]>(this.UsersURL + '/users/@' + this.getUsername() + '/following')
+    return this.http.get<User[]>(this.UsersURL + '/users/@' + this.getUsername() + '/following');
   }
 
   /*
@@ -187,21 +187,21 @@ export class UserService {
 
       error: 404 - UserNotFound
   */
-  getFollowers(optionalUser = undefined): Observable<User[]> {
+  getFollowers(optionalUser?: string): Observable<User[]> {
     if (!this.getUserLogStatus() && !optionalUser) {
-      console.log('ERROR: tried to access followers but no user is logged in and no arguments supplied')
+      console.log('ERROR: tried to access followers but no user is logged in and no arguments supplied');
       return undefined;
     } else if (optionalUser) {
-      return this.http.get<User[]>(this.UsersURL + '/users/@' + optionalUser + '/followers')
+      return this.http.get<User[]>(this.UsersURL + '/users/@' + optionalUser + '/followers');
     }
-    return this.http.get<User[]>(this.UsersURL + '/users/@' + this.getUsername() + '/followers')
+    return this.http.get<User[]>(this.UsersURL + '/users/@' + this.getUsername() + '/followers');
   }
 
   /*
       postUser sends a new user to the api endpoint '/users'. postUser is used by the signup form to create a new user on the server.
 
-      arguments: you must supply a NewUser. A NewUser object exists only on the frontend and the new user is converted into a format the server
-    understands by this function.
+      arguments: you must supply a NewUser. A NewUser object exists only on the frontend
+    and the new user is converted into a format the server understands by this function.
 
       return: returns an observable that returns the user object created by the server.
 
@@ -209,11 +209,8 @@ export class UserService {
              403 - UserAlreadyExists
   */
   postUser(newUser: NewUser): Observable<User> {
-    var toServer: ServerFormattedUser;
-    let credentials: Credentials;
-    let profile: Profile;
-
-    let name = newUser.fullname.split(' ');
+    let toServer: ServerFormattedUser;
+    const name = newUser.fullname.split(' ');
 
     toServer = {
       credentials: {
@@ -268,7 +265,8 @@ export class UserService {
   }
 
   /*
-      postFollowUser posts to the apit endpoint '/users/@username/follow' to set the logged in user to be following the username supplied in the arguments.
+      postFollowUser posts to the apit endpoint '/users/@username/follow' to set the logged in user to be
+    following the username supplied in the arguments.
 
       arguments: you must supply the username of the user that you want to follow.
 
@@ -289,7 +287,8 @@ export class UserService {
   }
 
   /*
-    postFollowUser posts to the apit endpoint '/users/@username/unfollow' to remove the username supplied from the list of followers of the logged in user.
+    postFollowUser posts to the apit endpoint '/users/@username/unfollow' to remove the username supplied
+  from the list of followers of the logged in user.
 
     arguments: you must supply the username of the user that you want to unfollow.
 

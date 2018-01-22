@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UserService, Log } from './user.service'
+import { UserService, Log } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +7,10 @@ import { UserService, Log } from './user.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
+
   userLoggedIn: Log;
 
-  constructor(private userService: UserService){
+  constructor(private userService: UserService) {
 
   }
 }
