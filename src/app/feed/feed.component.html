@@ -1,9 +1,9 @@
 <div class="container" fxLayout="row" fxLayout.xs="column">
   <div class="left-col" style="width: 275px; height: 300px;">
-    <app-user-blurb></app-user-blurb>
+    <app-user-blurb [user]="userService.getUser()"></app-user-blurb>
   </div>
   <div class="main-col" fxLayout="column" fxFlex fxLayoutGap="10px" style="margin-left:10px;margin-right:10px;">
-    <h2 fxFlexAlign="center">Welcome to today's drama, username</h2>
+    <h2 fxFlexAlign="center">Welcome to today's drama, {{userService.getUser().profile.firstName}}</h2>
     <div class="tweet-add" fxLayout="column" fxFlex="170px" fxFlex.xs="170px">
       <mat-form-field floatLabel="auto" hintLabel="(max 140 characters)">
         <textarea #input matInput maxlength="140" placeholder="Add more drama!"

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Tweet } from '../tweet';
 import { TweetService } from '../tweet.service';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-feed',
@@ -9,11 +11,13 @@ import { TweetService } from '../tweet.service';
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
+  user: User;
   tweets: Tweet[];
 
-  constructor(private tweetService: TweetService) { }
+  constructor(private userService: UserService, private tweetService: TweetService) { }
 
   ngOnInit() {
+    this.user = this.userService.getUser();
     this.getTweets();
   }
 
