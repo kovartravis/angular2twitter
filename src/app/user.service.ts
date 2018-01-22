@@ -17,6 +17,13 @@ export class UserService {
   }
 
   /*
+    getUserLoggedIn returns the whole user data object 
+  */
+  getUserLoggedIn(): Log{
+    return this.userLoggedIn;
+  }
+
+  /*
     getUserLogStatus returns a boolean indicating whether or not there is a user currently logged in. 
   */
 
@@ -217,6 +224,67 @@ export class UserService {
       }
     }
     return this.http.post<User>(this.UsersURL + '/users', toServer)
+  }
+
+  /*
+      patchUser updates the profile of an existing user.
+
+      arguments: you must supply a profile object.
+
+      return: returns an observable that returns the updated user object.
+
+      error: 404 - UserDoesNotExistException
+             401 - CredentialsDoNotMatchException
+             400 - SomethingIsNullAndShouldntBe
+  */
+  patchUser(profile: Profile): Observable<User> {
+    if(!this.getUserLogStatus()){
+      console.log('ERROR: tried to patch user but no user is logged in')
+      return undefined;
+    }
+    return this.http.patch<User>(this.UsersURL + '/@' + this.getUsername(), profile)
+  }
+
+  /*
+      postFollowUser posts to the apit endpoint '/users/@username/follow' to set the logged in user to be following the username supplied in the arguments.
+
+      arguments: you must supply the username of the user that you want to follow.
+
+      return: void
+
+      error: 404 - UserDoesNotExist (either the user logged in or the user to be followed does not exist)
+             401 - CredentialsDoNotMatch
+             403 - AlreadyFollowingUser
+             400 - SomthingIsNullAndItShouldntBe
+             
+  */
+  postFollowUser(username: string): void {
+    if(!this.getUserLogStatus()){
+      console.log('ERROR: tried to follow a user but no user logged in')
+      return;
+    }
+    this.http.post(this.UsersURL + '/users/@' + username + '/follow', this.getCredentials())
+  }
+
+    /*
+      postFollowUser posts to the apit endpoint '/users/@username/unfollow' to remove the username supplied from the list of followers of the logged in user.
+
+      arguments: you must supply the username of the user that you want to unfollow.
+
+      return: void
+
+      error: 404 - UserDoesNotExist (either the user logged in or the user to be followed does not exist)
+             401 - CredentialsDoNotMatch
+             403 - NotFollowingUser
+             400 - SomthingIsNullAndItShouldntBe
+             
+  */
+  postUnFollowUser(username: string): void {
+    if(!this.getUserLogStatus()){
+      console.log('ERROR: tried to follow a user but no user logged in')
+      return;
+    }
+    this.http.post(this.UsersURL + '/users/@' + username + '/unfollow', this.getCredentials())
   }
 
   /*
