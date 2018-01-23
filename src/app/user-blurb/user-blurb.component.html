@@ -2,7 +2,7 @@
   <div *ngSwitchCase="true">
     <mat-card class="user-blurb-card">
       <!--<div mat-card-avatar fxFlexAlign="center">-->
-        <a [href]="'/profile/@' + userService.getUsername()" class="user-blurb-top" fxLayout="column" fxLayoutAlign="center center">
+        <a [routerLink]="'/profile/' + userService.getUsername()" class="user-blurb-top" fxLayout="column" fxLayoutAlign="center center">
           <div class="circle">
             <!--material icon "person" svg format, upsized-->
             <svg fill="primary" height="72" viewBox="0 0 24 24" width="72" xmlns="http://www.w3.org/2000/svg">

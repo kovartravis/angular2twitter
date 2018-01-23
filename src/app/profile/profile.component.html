@@ -1,6 +1,6 @@
 <div class="profile" fxLayout="row" fxLayout.xs="column">
   <div class="left">
-    <app-user-blurb></app-user-blurb>
+    <app-user-blurb [user]="userService.getUser()"></app-user-blurb>
     <div [ngSwitch]="thisIsMyProfile">
       <div *ngSwitchCase="true" class="profile-buttons">
           <button mat-raised-button (click)="openDialogEditProfile()">Edit Profile</button>
