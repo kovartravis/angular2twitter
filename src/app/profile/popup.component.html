@@ -1,19 +1,26 @@
 <div class="profile-edit-form">
     <div class="form-input">
-        <mat-form-field class="full width">
-            <input matInput placeholder="Email" [(ngModel)]="profile.email">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Email" [(ngModel)]="profile.email" [formControl]="emailFormControl" [errorStateMatcher]="emailMatcher" required>
+            <mat-error class="popup_error" *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="full-width">
             <input matInput placeholder="First Name" [(ngModel)]="profile.firstName">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="full-width">
                 <input matInput placeholder="Last Name" [(ngModel)]="profile.lastName">
             </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="full-width">
             <input matInput placeholder="Phone Number" [(ngModel)]="profile.phone">
         </mat-form-field>
     </div>
     <div class="form-buttons">
-        <button mat-raised-button (click)="onClick()">Save Changes</button>
+        <button mat-raised-button (click)="onClickDiscard()">Discard Changes</button>
+        <button mat-raised-button color="primary" (click)="onClickSave()">Save Changes</button>
     </div>
 </div>

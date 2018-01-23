@@ -7,6 +7,7 @@ import { FeedComponent } from './feed/feed.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignoutComponent } from './signout/signout.component';
+import { UserResolve } from './resolve.service';
 
 const routes: Routes = [
   { path: 'landing', component: LandingComponent },
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'feed', component: FeedComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'profile/:username', component: ProfileComponent},
+  { path: 'profile/:username', component: ProfileComponent, resolve: { user: UserResolve } },
   { path: 'signout', component: SignoutComponent}
 ]
 

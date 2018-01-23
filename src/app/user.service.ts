@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { NewUser, User, ServerFormattedUser, Credentials, Profile } from './user';
 import { Tweet } from './tweet';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @Injectable()
 export class UserService {
@@ -13,8 +14,12 @@ export class UserService {
   private userLoggedIn: Log;
   private wait = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cookieService: CookieService) {
     this.userLoggedIn = { status: false, credentials: undefined, user: undefined };
+    const userData = this.cookieService.getObject('userData');
+    if (userData) {
+      this.userLoggedIn = this.cookieService.getObject('userData') as Log;
+    }
   }
 
   /*
@@ -55,11 +60,23 @@ export class UserService {
     this.userLoggedIn.user = user;
   }
 
+    /*
+      setUser sets the profile object
+  */
+  setProfile(profile: Profile): void {
+    this.userLoggedIn.user.profile = profile;
+    this.cookieService.putObject('userData', this.userLoggedIn);
+  }
+
   /*
       getOtherUser returns another user as an observable that returns a user
   */
   getOtherUser(user: string): Observable<User> {
     return this.http.get<User>(this.UsersURL + '/users/@' + user);
+  }
+
+  getUserWithPromise(user: string): Promise<User> {
+    return this.http.get<User>(this.UsersURL + '/users/@' + user).toPromise();
   }
 
   /*
@@ -332,6 +349,7 @@ export class UserService {
   logIn(creds: Credentials) {
     this.userLoggedIn.status = true;
     this.userLoggedIn.credentials = creds;
+    this.cookieService.putObject('userData', this.userLoggedIn);
   }
 
   /*
@@ -341,6 +359,7 @@ export class UserService {
     this.userLoggedIn.status = false;
     this.userLoggedIn.credentials = undefined;
     this.userLoggedIn.user = undefined;
+    this.cookieService.putObject('userData', this.userLoggedIn);
   }
 }
 

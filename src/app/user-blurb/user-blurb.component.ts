@@ -14,7 +14,7 @@ export class UserBlurbComponent implements OnInit {
   following: User[] = [];
   mentions: Tweet[] = [];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     if (this.user) {

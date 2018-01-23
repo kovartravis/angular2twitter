@@ -3,8 +3,8 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ErrorStateMatcher } from '@angular/material/core';
 import { EmailErrorStateMatcher, UsernameErrorStateMatcher, PasswordErrorStateMatcher } from '../error-states';
 import { UserService } from '../user.service';
-import { alreadyExistsNameValidator } from '../validators'
-import { NewUser, Credentials } from '../user'
+import { alreadyExistsNameValidator } from '../validators';
+import { NewUser, Credentials } from '../user';
 import { StateService } from '@uirouter/angular';
 import { Router } from '@angular/router';
 
@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
      [alreadyExistsNameValidator(this.userService)]
     );
 
-    this.passwordFormControl = new FormControl('',[
+    this.passwordFormControl = new FormControl('', [
       Validators.required
     ]);
   }
