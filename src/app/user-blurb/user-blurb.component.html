@@ -1,31 +1,23 @@
-<div [ngSwitch]="userService.getUserLogStatus()">
-  <div *ngSwitchCase="true">
-    <mat-card class="user-blurb-card">
-      <!--<div mat-card-avatar fxFlexAlign="center">-->
-        <a [routerLink]="'/profile/' + userService.getUsername()" class="user-blurb-top" fxLayout="column" fxLayoutAlign="center center">
-          <div class="circle">
-            <!--material icon "person" svg format, upsized-->
-            <svg fill="primary" height="72" viewBox="0 0 24 24" width="72" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-              <path d="M0 0h24v24H0z" fill="none"/>
-            </svg>
-          </div>
-          <mat-card-title class="user-full-name" *ngIf="user !== undefined">{{ user.profile.firstName + ' ' + user.profile.lastName}}</mat-card-title>
-          <mat-card-subtitle class="username" *ngIf="user !== undefined">@{{user.username}}</mat-card-subtitle>
-        </a>
-        <div class="user-blurb-bottom" fxLayout="column" fxLayoutAlign="start center" *ngIf="user !== undefined">
-          <div class="user-blurb-bottom-links" fxLayout="row" fxLayoutAlign="center start">
-              <button mat-button><p>Followers</p><p>{{followers.length}}</p></button>
-              <button mat-button><p>Following</p><p>{{following.length}}</p></button>
-              <button mat-button><p>Mentions</p><p>{{mentions.length}}</p></button>
-          </div>
-          <button *ngIf="showFollow()" mat-raised-button color="accent">{{getFollowButtonName()}}</button>
-          <mat-card-content fxLayoutAlign="center center">Joined: Jan 16, 2018, 2:57 PM</mat-card-content>
-        </div>
-      </mat-card>
-  </div>
-  <div *ngSwitchCase="false">
-    <p>Insert better html here</p>
-  </div>
-</div>
-
+<mat-card *ngIf="user" class="user-blurb-card">
+  <!--<div mat-card-avatar fxFlexAlign="center">-->
+    <a [routerLink]="'/profile/' + user.username" class="user-blurb-top" fxLayout="column" fxLayoutAlign="center center">
+      <div class="circle">
+        <!--material icon "person" svg format, upsized-->
+        <svg fill="primary" height="72" viewBox="0 0 24 24" width="72" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      </div>
+      <mat-card-title class="user-full-name">{{ user.profile.firstName + ' ' + user.profile.lastName}}</mat-card-title>
+      <mat-card-subtitle class="username">@{{user.username}}</mat-card-subtitle>
+    </a>
+    <div class="user-blurb-bottom" fxLayout="column" fxLayoutAlign="start center">
+      <div class="user-blurb-bottom-links" fxLayout="row" fxLayoutAlign="center start">
+          <button mat-button><p>Followers</p><p>{{followers.length}}</p></button>
+          <button mat-button><p>Following</p><p>{{following.length}}</p></button>
+          <button mat-button><p>Mentions</p><p>{{mentions.length}}</p></button>
+      </div>
+      <button *ngIf="showFollow()" mat-raised-button color="accent">{{getFollowButtonName()}}</button>
+      <mat-card-content fxLayoutAlign="center center">Joined: Jan 16, 2018, 2:57 PM</mat-card-content>
+    </div>
+</mat-card>

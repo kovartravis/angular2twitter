@@ -60,8 +60,14 @@ export class SignupComponent implements OnInit {
     if (this.emailFormControl.errors || this.usernameFormControl.errors || this.passwordFormControl.errors) {
       console.log('Form Validation Error!');
     } else {
-      this.userService.postUser(this.user).subscribe( result => {
-                                 console.log(result); this.takeUserToFeedPage(); }, error => { this.serverError = error.message; });
+      this.userService.postUser(this.user)
+        .subscribe( result => {
+              console.log(result);
+              this.userService.setUser(result);
+              this.takeUserToFeedPage();
+          }, error => {
+              this.serverError = error.message;
+        });
     }
   }
 

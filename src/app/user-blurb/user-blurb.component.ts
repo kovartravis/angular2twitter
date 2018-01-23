@@ -17,7 +17,7 @@ export class UserBlurbComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    if (this.userService.getUserLogStatus()) {
+    if (this.user) {
       this.getFollowers();
       this.getFollowing();
       this.getMentions();
@@ -25,7 +25,7 @@ export class UserBlurbComponent implements OnInit {
   }
 
   getFollowers() {
-    this.userService.getFollowers()
+    this.userService.getFollowers(this.user.username)
       .subscribe( followers => {
         console.log('+UserBlurbComponent.getFollowers() returned: ', followers);
         this.followers = followers;
@@ -34,14 +34,14 @@ export class UserBlurbComponent implements OnInit {
       });
   }
   getFollowing() {
-    this.userService.getFollowing()
+    this.userService.getFollowing(this.user.username)
       .subscribe( following => {
         console.log('+UserBlurbComponent.getFollowing() returned: ', following);
         this.following = following;
       });
   }
   getMentions() {
-    this.userService.getMentions()
+    this.userService.getMentions(this.user.username)
       .subscribe( mentions => {
         console.log('+UserBlurbComponent.getMentions() returned: ', mentions);
         this.mentions = mentions;

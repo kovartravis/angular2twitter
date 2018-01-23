@@ -4,6 +4,7 @@ import { Tweet } from '../tweet';
 import { TweetService } from '../tweet.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -12,33 +13,34 @@ import { UserService } from '../user.service';
 })
 export class FeedComponent implements OnInit {
   user: User;
-  tweets: Tweet[];
+  feed: Tweet[];
 
-  constructor(private userService: UserService, private tweetService: TweetService) { }
+  constructor(private userService: UserService, private tweetService: TweetService, private state$: Router) { }
 
   ngOnInit() {
     if (this.userService.getUserLogStatus()) {
-      setTimeout( () => this.user = this.userService.getUser() );
+      this.user = this.userService.getUser();
       this.getTweets();
+    } else {
+      this.state$.navigateByUrl('/landing');
     }
   }
-
   getTweets(): void {
-    this.tweetService.getTweets()
-      .subscribe(tweets => this.tweets = tweets);
+    this.userService.getFeed(this.user.username)
+      .subscribe(tweets => this.feed = tweets);
   }
   onClickChirp(content: string): void {
     content = content.trim();
     if (!content) { return; }
     this.tweetService.addTweet(content)
       .subscribe(tweet => {
-        this.tweets.unshift(tweet);
+        this.feed.unshift(tweet);
       });
   }
   onTweetDeleted(tweet: Tweet): void {
-    const index = this.tweets.findIndex(x => tweet === x);
+    const index = this.feed.findIndex(x => tweet === x);
     if (index !== -1) {
-      this.tweets.splice(index, 1);
+      this.feed.splice(index, 1);
     }
   }
 

@@ -26,11 +26,20 @@ export class LoginComponent implements OnInit {
 
   loginButtonClicked() {
     this.serverError = '';
-    this.userService.getCredentialsValid(this.user).subscribe( result => { if (result) { this.takeUserToFeedPage();
-                                                                         } else { this.invalidLoginAttempt = true; }
-                                                                         }, error => {
-                                                                           this.serverError = error.message;
-                                                                         });
+    this.userService.getCredentialsValid(this.user)
+      .subscribe( result => {
+          if (result) {
+            this.userService.getOtherUser(this.user.username)
+              .subscribe(user => {
+                this.userService.setUser(user);
+                this.takeUserToFeedPage();
+              });
+          } else {
+            this.invalidLoginAttempt = true;
+          }
+      }, error => {
+          this.serverError = error.message;
+      });
   }
 
   takeUserToFeedPage() {

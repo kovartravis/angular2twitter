@@ -1,10 +1,9 @@
-<div class="container" fxLayout="row" fxLayout.xs="column">
+<div *ngIf="user" class="container" fxLayout="row" fxLayout.xs="column">
   <div class="left-col" style="width: 275px; height: 300px;">
     <app-user-blurb [user]="user"></app-user-blurb>
   </div>
   <div class="main-col" fxLayout="column" fxFlex fxLayoutGap="10px" style="margin-left:10px;margin-right:10px;">
-    <h2 fxFlexAlign="center" *ngIf="userService.getUserLogStatus() && user !== undefined">Welcome to today's drama, {{user.profile.firstName}}</h2>
-    <h2 fxFlexAlign="center" *ngIf="!userService.getUserLogStatus()">Welcome to today's drama, anon</h2>
+    <h2 fxFlexAlign="center">Welcome to today's drama, {{user.profile.firstName}}</h2>
     <div class="tweet-add" fxLayout="column" fxFlex="170px" fxFlex.xs="170px">
       <mat-form-field floatLabel="auto" hintLabel="(max 140 characters)">
         <textarea #input matInput maxlength="140" placeholder="Add more drama!"
@@ -15,7 +14,7 @@
       <button mat-raised-button color="primary" fxFlexAlign="center" (click)="onClickChirp(input.value); input.value = ''">Chirp!</button>
     </div>
     <div class="feed" fxLayoutGap="10px">
-      <app-tweet *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
+      <app-tweet *ngFor="let tweet of feed" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
     </div>
   </div>
 </div>

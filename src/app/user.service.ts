@@ -49,6 +49,13 @@ export class UserService {
   }
 
   /*
+      setUser sets the whole user object
+  */
+  setUser(user: User): void {
+    this.userLoggedIn.user = user;
+  }
+
+  /*
       getOtherUser returns another user as an observable that returns a user
   */
   getOtherUser(user: string): Observable<User> {
@@ -318,8 +325,8 @@ export class UserService {
   logIn(creds: Credentials) {
     this.userLoggedIn.status = true;
     this.userLoggedIn.credentials = creds;
-    this.http.get<User>(this.UsersURL + '/users/@' + creds.username).subscribe(result => {
-                                                         this.userLoggedIn.user = result; });
+    // this.http.get<User>(this.UsersURL + '/users/@' + creds.username).subscribe(result => {
+    //                                                      this.userLoggedIn.user = result; });
   }
 
   /*
