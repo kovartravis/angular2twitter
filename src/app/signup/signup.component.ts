@@ -56,13 +56,12 @@ export class SignupComponent implements OnInit {
     ]);
   }
 
-  signupButtonClicked(){
+  signupButtonClicked() {
     if (this.emailFormControl.errors || this.usernameFormControl.errors || this.passwordFormControl.errors) {
       console.log('Form Validation Error!');
     } else {
       this.userService.postUser(this.user)
         .subscribe( result => {
-              console.log(result);
               this.userService.setUser(result);
               this.takeUserToFeedPage();
           }, error => {

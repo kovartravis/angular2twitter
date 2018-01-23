@@ -320,13 +320,18 @@ export class UserService {
   }
 
   /*
-    logIn sets userLoggedIn.status to true and sets all userLoggedIn.credentials and userLoggedIn.user based on the supplied credentials.
+    logUser is used by the login component to check credentials and get user data in one call.
+  */
+  logUser(credentials: Credentials): Observable<User> {
+    return this.http.post<User>(this.UsersURL + '/users/login', credentials);
+  }
+
+  /*
+    logIn sets userLoggedIn.status to true and sets userLoggedIn.credentials based on the supplied credentials.
   */
   logIn(creds: Credentials) {
     this.userLoggedIn.status = true;
     this.userLoggedIn.credentials = creds;
-    // this.http.get<User>(this.UsersURL + '/users/@' + creds.username).subscribe(result => {
-    //                                                      this.userLoggedIn.user = result; });
   }
 
   /*

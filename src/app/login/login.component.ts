@@ -26,17 +26,10 @@ export class LoginComponent implements OnInit {
 
   loginButtonClicked() {
     this.serverError = '';
-    this.userService.getCredentialsValid(this.user)
+    this.userService.logUser(this.user)
       .subscribe( result => {
-          if (result) {
-            this.userService.getOtherUser(this.user.username)
-              .subscribe(user => {
-                this.userService.setUser(user);
-                this.takeUserToFeedPage();
-              });
-          } else {
-            this.invalidLoginAttempt = true;
-          }
+        this.userService.setUser(result);
+        this.takeUserToFeedPage();
       }, error => {
           this.serverError = error.message;
       });
