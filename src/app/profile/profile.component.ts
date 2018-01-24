@@ -6,6 +6,7 @@ import { Profile, User } from '../user';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { EmailErrorStateMatcher } from '../error-states';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Tweet } from '../tweet';
 
 @Component({
   selector: 'app-profile',
@@ -17,12 +18,14 @@ export class ProfileComponent implements OnInit {
   private username: string;
   private thisIsMyProfile: boolean;
   private user: User;
+  private tweets: Tweet[];
   sub: any;
 
   constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.user = this.route.snapshot.data['user'];
+    this.tweets = this.route.snapshot.data['tweets'];
     this.sub = this.route.params.subscribe(params => {
       this.username = params['username'];
       if (this.username.match(this.user.username)) {

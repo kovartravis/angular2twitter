@@ -1,5 +1,11 @@
 .center{
     width: 60%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.tweet{
+    padding: 5px;
 }
 
 .profile-buttons{

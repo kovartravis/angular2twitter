@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="center">
-      <app-tweet *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
+      <app-tweet class="tweet" *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
   </div>
   <div class="right">
     <p>space for the future</p>
