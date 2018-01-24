@@ -10,6 +10,7 @@ import { TweetDto } from './tweet-dto';
 import {User} from './user';
 import {Hashtag} from './hashtag';
 import {Context} from './context';
+import { UserService } from './user.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,10 +24,8 @@ interface Credentials {
 @Injectable()
 export class TweetService {
   private tweetsUrl = `${AppConfig.API_URL}/tweets`;
-  // temporary hard-coded credentials
-  credentials = {username: 'cbrugger0', password: 'password'};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   private log(message: string) {
     console.log('TweetService: ' + message);
@@ -55,8 +54,12 @@ export class TweetService {
   }
   /** POST: add a new tweet */
   addTweet (content: string): Observable<Tweet> {
+    if (this.userService.getUserLogStatus()) {
+      console.log('ERROR: tried to tweet but no user logged in');
+      return undefined;
+    }
     const tweetDto: TweetDto = {
-      credentials: this.credentials,
+      credentials: this.userService.getCredentials(),
       content
     };
     return this.http.post<Tweet>(this.tweetsUrl, tweetDto, httpOptions)
@@ -85,8 +88,12 @@ export class TweetService {
   }
   /** POST: like a tweet */
   likeTweet (id: number): Observable<any> {
+    if (this.userService.getUserLogStatus()) {
+      console.log('ERROR: tried to like tweet but no user logged in');
+      return undefined;
+    }
     const url = `${this.tweetsUrl}/${id}/like`;
-    return this.http.post(url, this.credentials, httpOptions)
+    return this.http.post(url, this.userService.getCredentials(), httpOptions)
       .pipe(
         tap(() => this.log(`liked tweet id=${id}`)),
         catchError(this.handleError<Tweet>('likeTweet'))
@@ -94,9 +101,13 @@ export class TweetService {
   }
   /** POST: reply to a tweet */
   replyToTweet (id: number, content: string): Observable<Tweet> {
+    if (this.userService.getUserLogStatus()) {
+      console.log('ERROR: tried to reply to tweet but no user logged in');
+      return undefined;
+    }
     const url = `${this.tweetsUrl}/${id}/reply`;
     const tweetDto: TweetDto = {
-      credentials: this.credentials,
+      credentials: this.userService.getCredentials(),
       content
     };
     return this.http.post<Tweet>(url, tweetDto, httpOptions)
@@ -107,8 +118,12 @@ export class TweetService {
   }
   /** POST: repost a tweet */
   repostTweet (id: number): Observable<Tweet> {
+    if (this.userService.getUserLogStatus()) {
+      console.log('ERROR: tried to repost tweet but no user logged in');
+      return undefined;
+    }
     const url = `${this.tweetsUrl}/${id}/repost`;
-    return this.http.post<Tweet>(url, this.credentials, httpOptions)
+    return this.http.post<Tweet>(url, this.userService.getCredentials(), httpOptions)
       .pipe(
         tap((tweet: Tweet) => this.log(`replosted tweet, repost id=${tweet.id}`)),
         catchError(this.handleError<Tweet>('repostTweet'))

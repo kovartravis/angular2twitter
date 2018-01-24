@@ -1,5 +1,11 @@
 .center{
     width: 60%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.tweet{
+    padding: 5px;
 }
 
 .profile-buttons{
@@ -8,7 +14,11 @@
 }
 
 .profile-edit-form{
-    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+    width: 20vw;
 }
 .full-width{
     width: 100%;

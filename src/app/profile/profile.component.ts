@@ -6,6 +6,8 @@ import { Profile, User } from '../user';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { EmailErrorStateMatcher } from '../error-states';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { TweetService } from '../tweet.service';
+import { Tweet } from '../tweet';
 
 @Component({
   selector: 'app-profile',
@@ -17,12 +19,15 @@ export class ProfileComponent implements OnInit {
   private username: string;
   private thisIsMyProfile: boolean;
   private user: User;
+  private tweets: Tweet[];
   sub: any;
 
-  constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute, public dialog: MatDialog,
+              private userService: UserService, private tweetService: TweetService) {}
 
   ngOnInit() {
     this.user = this.route.snapshot.data['user'];
+    this.tweets = this.route.snapshot.data['tweets'];
     this.sub = this.route.params.subscribe(params => {
       this.username = params['username'];
       if (this.username.match(this.user.username)) {
@@ -35,14 +40,15 @@ export class ProfileComponent implements OnInit {
 
   openDialogEditProfile() {
     const dialogRef = this.dialog.open(ProfileEditPopupComponent, {
-      width: '40vw',
+      width: '25vw',
       data: { profile: Object.assign({}, this.user.profile) }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.userService.setProfile(result);
-      this.user.profile = result;
+      if (result) {
+        this.userService.setProfile(result);
+        this.user.profile = result;
+      }
     });
   }
 }
@@ -66,8 +72,6 @@ export class ProfileEditPopupComponent implements OnInit {
       this.profile = data.profile;
       this.saveInitialProfile = Object.assign({}, data.profile);
       this.emailMatcher = new EmailErrorStateMatcher();
-      console.log(this.emailMatcher);
-
     }
 
   ngOnInit() {
@@ -78,7 +82,7 @@ export class ProfileEditPopupComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.saveInitialProfile);
   }
 
   onClickDiscard(): void {
