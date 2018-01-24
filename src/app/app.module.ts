@@ -23,7 +23,7 @@ import { TweetService } from './tweet.service';
 import { ProfileComponent, ProfileEditPopupComponent } from './profile/profile.component';
 import { SignoutComponent } from './signout/signout.component';
 import { MatDialogModule } from '@angular/material';
-import { UserResolve, TweetResolve } from './resolve.service';
+import { UserResolve, TweetResolve, MentionResolve } from './resolve.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @NgModule({
@@ -58,7 +58,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     MatDialogModule
   ],
   entryComponents: [ProfileEditPopupComponent],
-  providers: [UserService, TweetService, UserResolve, CookieService, TweetResolve],
+  providers: [UserService, TweetService, UserResolve, CookieService, TweetResolve, MentionResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

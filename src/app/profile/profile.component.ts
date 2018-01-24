@@ -19,6 +19,10 @@ export class ProfileComponent implements OnInit {
   private thisIsMyProfile: boolean;
   private user: User;
   private tweets: Tweet[];
+  private mentions: Tweet[];
+  // waiting for follow to be implemented
+  // private following: User[];
+  // private followers: User[];
   sub: any;
 
   constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) {}
@@ -26,6 +30,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.user = this.route.snapshot.data['user'];
     this.tweets = this.route.snapshot.data['tweets'];
+    this.mentions = this.route.snapshot.data['mentions'];
     this.sub = this.route.params.subscribe(params => {
       this.username = params['username'];
       if (this.username.match(this.user.username)) {

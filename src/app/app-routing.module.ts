@@ -7,7 +7,7 @@ import { FeedComponent } from './feed/feed.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignoutComponent } from './signout/signout.component';
-import { UserResolve, TweetResolve } from './resolve.service';
+import { UserResolve, TweetResolve, MentionResolve } from './resolve.service';
 
 const routes: Routes = [
   { path: 'landing', component: LandingComponent },
@@ -15,9 +15,10 @@ const routes: Routes = [
   { path: 'feed', component: FeedComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'profile/:username', component: ProfileComponent, resolve: { user: UserResolve, tweets: TweetResolve } },
+  { path: 'profile/:username', component: ProfileComponent,
+          resolve: { user: UserResolve, tweets: TweetResolve, mentions: MentionResolve } },
   { path: 'signout', component: SignoutComponent}
-]
+];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

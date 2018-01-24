@@ -162,15 +162,6 @@ export class UserService {
     return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/tweets');
   }
 
-  getTweetsAsPromise(optionalUser?: string): Promise<Tweet[]> {
-    if (!this.getUserLogStatus() && !optionalUser) {
-      console.log('ERROR: tried to access tweets but no user is logged in and no arguments supplied');
-      return undefined;
-    } else if (optionalUser) {
-      return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + optionalUser + '/tweets').toPromise();
-    }
-    return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/tweets').toPromise();
-  }
   /*
       getMentions returns the value of the '/users/@username/mentions' api endpoint.
 

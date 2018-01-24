@@ -8,6 +8,10 @@
     padding: 5px;
 }
 
+.profile-tabs{
+    height: 100%;
+}
+
 .profile-buttons{
     display: flex;
     flex-direction: column;
