@@ -16,7 +16,7 @@ export class LinkifyPipe implements PipeTransform {
           href = `hashtag?query=${href.substring(1)}`;
         }
         if (type === 'mention') {
-          href = `users/@${href.substring(1)}/profile`;
+          href = `profile/${href.substring(1)}`;
         }
         return href;
       }
