@@ -18,6 +18,6 @@
           <button mat-button><p>Mentions</p><p>{{mentions.length}}</p></button>
       </div>
       <button *ngIf="showFollow()" mat-raised-button color="accent">{{getFollowButtonName()}}</button>
-      <mat-card-content fxLayoutAlign="center center">Joined: Jan 16, 2018, 2:57 PM</mat-card-content>
+      <mat-card-content fxLayoutAlign="center center">Joined: {{user.joined | date:'medium'}}</mat-card-content>
     </div>
 </mat-card>
