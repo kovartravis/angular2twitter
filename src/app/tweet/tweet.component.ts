@@ -24,13 +24,17 @@ export class TweetComponent implements OnInit {
     if (time < 60) { // seconds
       this.simplifiedPostDate = 'now';
     } else if (time < 3600) { // minutes
-      this.simplifiedPostDate = (time / 60).toFixed(0) + ' mins ago';
+      const tempTime = (time / 60).toFixed(0);
+      this.simplifiedPostDate = tempTime.concat((tempTime === '1') ? ' min ago' : ' mins ago');
     } else if (time < 86400) { // hours
-      this.simplifiedPostDate = (time / 1440).toFixed(0) + ' hours ago';
+      const tempTime = (time / 3600).toFixed(0);
+      this.simplifiedPostDate = tempTime.concat((tempTime === '1') ? ' hour ago' : ' hours ago');
     } else if (time < 31536000) { // days
-      this.simplifiedPostDate = (time / 525600).toFixed(0) + ' days ago';
+      const tempTime = (time / 86400).toFixed(0);
+      this.simplifiedPostDate = tempTime.concat((tempTime === '1') ? ' day ago' : ' days ago');
     } else { // years
-      this.simplifiedPostDate = (time / 31536000).toFixed(0) + ' years ago';
+      const tempTime = (time / 31536000).toFixed(0);
+      this.simplifiedPostDate = tempTime.concat((tempTime === '1') ? ' year ago' : ' years ago');
     }
   }
 
