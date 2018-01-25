@@ -36,3 +36,13 @@ export class MentionResolve implements Resolve<Tweet[]> {
         return this.userService.getMentions(username).toPromise().then( result => result );
     }
 }
+
+@Injectable()
+export class LikesResolve implements Resolve<Tweet[]> {
+    constructor(private userService: UserService, private router: Router) { }
+
+    resolve(route: ActivatedRouteSnapshot): Promise<Tweet[]> {
+        const username = route.params['username'];
+        return this.userService.getLikes(username).toPromise().then( result => result );
+    }
+}

@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   private user: User;
   private tweets: Tweet[];
   private mentions: Tweet[];
+  private likes: Tweet[];
   // waiting for follow to be implemented
   // private following: User[];
   // private followers: User[];
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
     this.user = this.route.snapshot.data['user'];
     this.tweets = this.route.snapshot.data['tweets'];
     this.mentions = this.route.snapshot.data['mentions'];
+    this.likes = this.route.snapshot.data['likes'];
     this.sub = this.route.params.subscribe(params => {
       this.username = params['username'];
       if (this.username.match(this.user.username)) {

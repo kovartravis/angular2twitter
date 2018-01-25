@@ -12,6 +12,9 @@
         <mat-tab class="profile-tabs" label="Tweets">
           <app-tweet class="tweet" *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
         </mat-tab>
+        <mat-tab label="Likes">
+            <app-tweet class="tweet" *ngFor="let tweet of likes" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
+        </mat-tab>
         <mat-tab label="Mentions">
             <app-tweet class="tweet" *ngFor="let tweet of mentions" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
         </mat-tab>

@@ -184,6 +184,28 @@ export class UserService {
   }
 
   /*
+      getLikes returns the value of the '/users/@username/likes' api endpoint.
+
+      arguments: To access the likes of the logged in user give no arguments. To access the likes of another user give
+    the username of the user as an optional argument. If no argument is supplied and no user is logged in it will return undefined
+    with a silent error and a console output.
+
+      return: Returns an observable that returns an array of tweets.
+
+      error: 404 - UserNotFound
+             400 - Bad Request
+  */
+  getLikes(optionalUser?: string): Observable<Tweet[]> {
+    if (!this.getUserLogStatus() && !optionalUser) {
+      console.log('ERROR: tried to access likes but no user is logged in and no arguments supplied');
+      return undefined;
+    } else if (optionalUser) {
+      return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + optionalUser + '/likes');
+    }
+    return this.http.get<Tweet[]>(this.UsersURL + '/users/@' + this.getUsername() + '/likes');
+  }
+
+  /*
       getFollowing returns the value of the '/users/@username/following' api endpoint.
 
       arguments: To access following of the logged in user give no arguments. To access the following of another user give
