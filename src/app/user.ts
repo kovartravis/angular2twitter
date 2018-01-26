@@ -4,26 +4,26 @@ export class User {
   profile: Profile;
 }
 
-export class NewUser{
+export class NewUser {
   email: string;
   fullname: string;
   username: string;
   password: string;
 }
 
-export class Credentials{
+export class Credentials {
   username: string;
   password: string;
-};
+}
 
-export class Profile{
+export class Profile {
   email: string;
   firstName: string;
   lastName: string;
   phone: string;
 }
 
-export class ServerFormattedUser{
+export class ServerFormattedUser {
   credentials: Credentials;
   profile: Profile;
 }

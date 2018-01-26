@@ -12,7 +12,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class LandingComponent implements OnInit {
 
-  private users: User;
+  private users: User[];
+  private allUsers: User[];
   private tweets: Tweet[];
   private allTweets: Tweet[];
   private form: FormGroup;
@@ -31,7 +32,8 @@ export class LandingComponent implements OnInit {
   ngOnInit() {
     this.allTweets = this.route.snapshot.data['tweets'];
     this.tweets = this.allTweets;
-    this.users = this.route.snapshot.data['users'];
+    this.allUsers = this.route.snapshot.data['users'];
+    this.users = this.allUsers;
   }
 
   filterData( data ) {
@@ -43,12 +45,25 @@ export class LandingComponent implements OnInit {
         this.filterTweets(data.inputFilterTweets);
       }
     }
+
+    if (data.inputFilterUsers !== this.filter.users) {
+      if (data.inputFilterUsers === '') {
+        this.users = this.allUsers;
+      } else {
+        this.filterUsers(data.inputFilterUsers);
+      }
+    }
     this.filter.tweets = data.inputFilterTweets;
+    this.filter.users = data.inputFilterUsers;
   }
 
   filterTweets (filterParam: string) {
     this.tweets = this.allTweets.filter( tweet => tweet.tags.some( label => {
                               if (label.label.startsWith(filterParam)) { return true; } else { return false; } }));
+  }
+
+  filterUsers (filterParam: string) {
+    this.users = this.allUsers.filter ( user => user.username.startsWith(filterParam));
   }
 }
 
