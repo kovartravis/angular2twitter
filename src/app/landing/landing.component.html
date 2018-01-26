@@ -1,9 +1,22 @@
-<div class="landing">
-  <section class="tweet-view">
-    <app-tweet class="tweet" *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
-  </section>
-  <div class="user-view">
-        
+<form [formGroup]="form">
+<div class="tweets">
+  <mat-form-field  class="searchbar" >
+    <input matInput placeholder="filter hastags" formControlName="inputFilterTweets">
+  </mat-form-field>
+  <div class="tweet-holder">
+    <section class="tweet-view">
+      <app-tweet class="tweet" *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
+    </section>
   </div>
 </div>
-
+<div class= "users">
+  <mat-form-field  class="searchbar" >
+    <input matInput placeholder="filter usernames" formControlName="inputFilterUsers">
+  </mat-form-field>
+  <div class="user-holder">
+    <section class="user-view">
+        <app-user-blurb class="user" *ngFor="let user of users" [user]="user"></app-user-blurb>
+    </section>
+  </div>
+</div>
+</form>

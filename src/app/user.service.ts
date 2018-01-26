@@ -120,6 +120,13 @@ export class UserService {
   }
 
   /*
+    getAllUsers returns all users as an observable that returns an array of users.
+  */
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.UsersURL + '/users');
+  }
+
+  /*
     getFeed returns the value of the '/users/@username/feed' api endpoint. getFeed is normally used to get
   the feed of the logged in user but it can access any users feed and doesnt require credentials.
 

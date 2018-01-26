@@ -19,6 +19,15 @@ export class UserResolve implements Resolve<User> {
 }
 
 @Injectable()
+export class AllUserResolve implements Resolve<User[]> {
+    constructor(private userService: UserService, private router: Router) { }
+
+    resolve(route: ActivatedRouteSnapshot): Promise<User[]> {
+        return this.userService.getAllUsers().toPromise().then( result => result );
+    }
+}
+
+@Injectable()
 export class TweetResolve implements Resolve<Tweet[]> {
     constructor(private userService: UserService, private router: Router) { }
 

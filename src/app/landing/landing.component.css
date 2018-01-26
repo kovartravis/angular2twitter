@@ -1,8 +1,15 @@
-.landing{
+.tweets{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.tweet-holder{
     height: 30vh;
     display: flex;
     overflow-x: scroll;
-    overflow-y: hidden
+    overflow-y: hidden;
 }
 
 .tweet{
@@ -15,4 +22,33 @@
     align-self: top;
     flex: 0 0 auto;
     flex-direction: row;
+}
+.users{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding-top: 100px;
+}
+.user-holder{
+    height: 32vh;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.user-view{
+    height: 32vh;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: center;
+}
+.searchbar{
+    width: 15vw;
+    align-self: center;
+}
+
+.user{
+    padding: 5px;
 }

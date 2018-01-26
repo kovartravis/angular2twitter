@@ -7,10 +7,10 @@ import { FeedComponent } from './feed/feed.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignoutComponent } from './signout/signout.component';
-import { UserResolve, TweetResolve, MentionResolve, LikesResolve, AllTweetResolve } from './resolve.service';
+import { UserResolve, TweetResolve, MentionResolve, LikesResolve, AllTweetResolve, AllUserResolve } from './resolve.service';
 
 const routes: Routes = [
-  { path: 'landing', component: LandingComponent, resolve: { tweets: AllTweetResolve} },
+  { path: 'landing', component: LandingComponent, resolve: { tweets: AllTweetResolve, users: AllUserResolve} },
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
   { path: 'feed', component: FeedComponent },
   { path: 'signup', component: SignupComponent },
