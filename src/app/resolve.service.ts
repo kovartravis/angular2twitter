@@ -6,6 +6,7 @@ import {
 import { UserService } from './user.service';
 import { User } from './user';
 import { Tweet } from './tweet';
+import { TweetService } from './tweet.service';
 
 @Injectable()
 export class UserResolve implements Resolve<User> {
@@ -24,6 +25,15 @@ export class TweetResolve implements Resolve<Tweet[]> {
     resolve(route: ActivatedRouteSnapshot): Promise<Tweet[]> {
         const username = route.params['username'];
         return this.userService.getTweets(username).toPromise().then( result => result );
+    }
+}
+
+@Injectable()
+export class AllTweetResolve implements Resolve<Tweet[]> {
+    constructor(private router: Router, private tweetService: TweetService) { }
+
+    resolve(route: ActivatedRouteSnapshot): Promise<Tweet[]> {
+        return this.tweetService.getTweets().toPromise().then( result => result );
     }
 }
 

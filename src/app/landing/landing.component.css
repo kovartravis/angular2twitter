@@ -1,0 +1,18 @@
+.landing{
+    height: 30vh;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden
+}
+
+.tweet{
+    padding: 5px;
+}
+
+.tweet-view{
+    height: 30vh;
+    display: flex;
+    align-self: top;
+    flex: 0 0 auto;
+    flex-direction: row;
+}

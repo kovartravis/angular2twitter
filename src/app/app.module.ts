@@ -23,8 +23,9 @@ import { TweetService } from './tweet.service';
 import { ProfileComponent, ProfileEditPopupComponent } from './profile/profile.component';
 import { SignoutComponent } from './signout/signout.component';
 import { MatDialogModule } from '@angular/material';
-import { UserResolve, TweetResolve, MentionResolve, LikesResolve } from './resolve.service';
+import { UserResolve, TweetResolve, MentionResolve, LikesResolve, AllTweetResolve } from './resolve.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     MatCardModule,
     FlexLayoutModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
   entryComponents: [ProfileEditPopupComponent],
   providers: [UserService,
@@ -64,7 +66,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
               CookieService,
               TweetResolve,
               MentionResolve,
-              LikesResolve],
+              LikesResolve,
+              AllTweetResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

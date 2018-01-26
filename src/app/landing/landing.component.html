@@ -1,3 +1,9 @@
-<p>
-  landing works!
-</p>
+<div class="landing">
+  <section class="tweet-view">
+    <app-tweet class="tweet" *ngFor="let tweet of tweets" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
+  </section>
+  <div class="user-view">
+        
+  </div>
+</div>
+
