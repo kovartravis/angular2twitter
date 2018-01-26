@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material';
 import { UserResolve, TweetResolve, MentionResolve, LikesResolve, AllTweetResolve, AllUserResolve } from './resolve.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { SecurityModule } from './security/SecurityModule';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     FlexLayoutModule,
     HttpClientModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    SecurityModule
   ],
   entryComponents: [ProfileEditPopupComponent],
   providers: [UserService,
