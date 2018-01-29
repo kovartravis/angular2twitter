@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user';
 import { Tweet } from '../tweet';
@@ -10,6 +10,7 @@ import { Tweet } from '../tweet';
 })
 export class UserBlurbComponent implements OnInit {
   @Input() user: User;
+  @Output() userUnfollowed: EventEmitter<any> = new EventEmitter();
   followers: User[] = [];
   following: User[] = [];
   mentions: Tweet[] = [];
@@ -65,6 +66,7 @@ export class UserBlurbComponent implements OnInit {
         .subscribe( result => {
           this.isFollowed = false;
           this.getFollowers();
+          this.userUnfollowed.emit(this.user);
         }, error => {
           console.log('Error unfollowing user: ', error);
         });

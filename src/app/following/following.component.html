@@ -1,6 +1,6 @@
 <h2 style="text-align:center;">{{ title + ' ' + user.username }}</h2>
 <div fxLayout="row" fxLayoutWrap>
   <ul *ngFor="let user of following">
-    <app-user-blurb [user]="user"></app-user-blurb>
+    <app-user-blurb [user]="user"  (userUnfollowed)="onUserUnfollowed(user)"></app-user-blurb>
   </ul>
 </div>
