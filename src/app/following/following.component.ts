@@ -21,7 +21,6 @@ export class FollowingComponent implements OnInit {
     this.following = this.route.snapshot.data['following'];
   }
   onUserUnfollowed(user: User) {
-    console.log(user);
     const index = this.following.findIndex(x => user === x);
     if (index !== -1) {
       this.following.splice(index, 1);
