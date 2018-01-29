@@ -1,0 +1,6 @@
+  <h2 style="text-align:center;">{{user.username + '\'s ' + title}}</h2>
+  <div fxLayout="row" fxLayoutWrap>
+    <ul *ngFor="let follower of followers">
+      <app-user-blurb [user]="follower"></app-user-blurb>
+    </ul>
+  </div>

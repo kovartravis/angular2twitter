@@ -1,0 +1,6 @@
+<h2 style="text-align:center;">{{user.username + '\'s ' + title}}</h2>
+<div fxLayout="row" fxLayoutWrap>
+  <ul *ngFor="let mention of mentions">
+    <app-tweet [tweet]="mention"></app-tweet>
+  </ul>
+</div>

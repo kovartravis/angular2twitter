@@ -13,6 +13,7 @@ export class UserBlurbComponent implements OnInit {
   followers: User[] = [];
   following: User[] = [];
   mentions: Tweet[] = [];
+  isFollowed: boolean;
 
   constructor(private userService: UserService) {}
 
@@ -24,11 +25,15 @@ export class UserBlurbComponent implements OnInit {
     }
   }
 
+  setFollowed() {
+    this.isFollowed = this.followers.some( follower => follower.username === this.userService.getUsername());
+  }
   getFollowers() {
     this.userService.getFollowers(this.user.username)
       .subscribe( followers => {
         // console.log('+UserBlurbComponent.getFollowers() returned: ', followers);
         this.followers = followers;
+        this.setFollowed();
       }, err => {
         console.error(err);
       });
@@ -48,15 +53,30 @@ export class UserBlurbComponent implements OnInit {
       });
   }
   showFollow() {
-    return this.userService.getUserLogStatus() && this.user.username !== this.userService.getUsername();
+    return this.userService.getUserLogStatus()
+      && this.user.username !== this.userService.getUsername();
   }
   getFollowButtonName() {
-    return this.followers.some( follower => follower.username === this.userService.getUsername())
-      ? 'Follow'
-      : 'Unfollow';
+    return this.isFollowed ? 'Unfollow' : 'Follow';
   }
-  onClickFollowers() {
-
+  onClickFollow() {
+    if (this.isFollowed) {
+      this.userService.postUnFollowUser(this.user.username)
+        .subscribe( result => {
+          this.isFollowed = false;
+          this.getFollowers();
+        }, error => {
+          console.log('Error unfollowing user: ', error);
+        });
+    } else {
+      this.userService.postFollowUser(this.user.username)
+        .subscribe( result => {
+            this.isFollowed = true;
+            this.getFollowers();
+        }, error => {
+            console.log('Error following user: ', error);
+          }
+        );
+    }
   }
-
 }

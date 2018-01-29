@@ -17,7 +17,7 @@
           <button mat-button [routerLink]="'/' + user.username + '/following'"><p>Following</p><p>{{following.length}}</p></button>
           <button mat-button [routerLink]="'/' + user.username + '/mentions'"><p>Mentions</p><p>{{mentions.length}}</p></button>
       </div>
-      <button *ngIf="showFollow()" mat-raised-button color="accent">{{getFollowButtonName()}}</button>
+      <button *ngIf="showFollow()" mat-raised-button color="accent" (click)="onClickFollow()">{{getFollowButtonName()}}</button>
       <mat-card-content fxLayoutAlign="center center">Joined: {{user.joined | date:'medium'}}</mat-card-content>
     </div>
 </mat-card>

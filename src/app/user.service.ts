@@ -335,12 +335,12 @@ export class UserService {
              400 - SomthingIsNullAndItShouldntBe
 
   */
-  postFollowUser(username: string): void {
+  postFollowUser(username: string): Observable<boolean> {
     if (!this.getUserLogStatus()) {
       console.log('ERROR: tried to follow a user but no user logged in');
       return;
     }
-    this.http.post(this.UsersURL + '/users/@' + username + '/follow', this.getCredentials());
+    return this.http.post<boolean>(this.UsersURL + '/users/@' + username + '/follow', this.getCredentials());
   }
 
   /*
@@ -357,12 +357,12 @@ export class UserService {
            400 - SomthingIsNullAndItShouldntBe
 
 */
-  postUnFollowUser(username: string): void {
+  postUnFollowUser(username: string): Observable<boolean> {
     if (!this.getUserLogStatus()) {
       console.log('ERROR: tried to follow a user but no user logged in');
       return;
     }
-    this.http.post(this.UsersURL + '/users/@' + username + '/unfollow', this.getCredentials());
+    return this.http.post<boolean>(this.UsersURL + '/users/@' + username + '/unfollow', this.getCredentials());
   }
 
   /*
