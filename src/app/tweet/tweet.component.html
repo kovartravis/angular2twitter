@@ -1,4 +1,4 @@
-<div *ngIf="tweet">
+<div *ngIf="tweet" class="tweet">
   <mat-card class="tweet-card" fxLayout="column">
     <mat-card-title fxFlexAlign="center">{{tweet.author.profile.firstName + " " + tweet.author.profile.lastName}}</mat-card-title>
     <mat-card-subtitle fxFlexAlign="center"><a [routerLink]="'/profile/' + tweet.author.username" mat-button color="primary">@{{tweet.author.username}}</a></mat-card-subtitle>

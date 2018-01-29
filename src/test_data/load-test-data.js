@@ -48,5 +48,22 @@ function loadTestTweets(max) {
   }
 }
 
+function loadSomeFollowers(max) {
+  var n = max < userData.length ? max : userData.length;
+  var url = API_URL + '/users/@' + userData[0].username + '/follow';
+  console.log('POSTING ' + n + ' followers for ' + userData[0].username);
+  for (var i = 1; i < n; i++) {
+    var u = userData[i];
+    var credentials = {username: u.username, password: "password"};
+    var args = {
+      data: credentials,
+      headers: {"Content-Type": "application/json"}
+    };
+    client.post(url, args, function (data, response) {
+    });
+  }
+}
+
 loadTestUsers(NUM_TEST_USERS);
 setTimeout(function(){loadTestTweets(NUM_TEST_USERS)}, 3000);
+setTimeout(function(){loadSomeFollowers(NUM_TEST_USERS)}, 6000);

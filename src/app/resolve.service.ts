@@ -65,3 +65,24 @@ export class LikesResolve implements Resolve<Tweet[]> {
         return this.userService.getLikes(username).toPromise().then( result => result );
     }
 }
+
+@Injectable()
+export class FollowersResolve implements Resolve<User[]> {
+  constructor(private userService: UserService, private router: Router) { }
+
+  resolve(route: ActivatedRouteSnapshot): Promise<User[]> {
+    const username = route.params['username'];
+    return this.userService.getFollowers(username).toPromise().then( result => result );
+  }
+}
+
+@Injectable()
+export class FollowingResolve implements Resolve<User[]> {
+  constructor(private userService: UserService, private router: Router) { }
+
+  resolve(route: ActivatedRouteSnapshot): Promise<User[]> {
+    const username = route.params['username'];
+    return this.userService.getFollowing(username).toPromise().then( result => result );
+  }
+}
+

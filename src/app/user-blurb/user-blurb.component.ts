@@ -55,5 +55,8 @@ export class UserBlurbComponent implements OnInit {
       ? 'Follow'
       : 'Unfollow';
   }
+  onClickFollowers() {
+
+  }
 
 }

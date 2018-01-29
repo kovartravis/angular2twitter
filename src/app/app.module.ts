@@ -23,9 +23,21 @@ import { TweetService } from './tweet.service';
 import { ProfileComponent, ProfileEditPopupComponent } from './profile/profile.component';
 import { SignoutComponent } from './signout/signout.component';
 import { MatDialogModule } from '@angular/material';
-import { UserResolve, TweetResolve, MentionResolve, LikesResolve, AllTweetResolve, AllUserResolve } from './resolve.service';
+import {
+  UserResolve,
+  TweetResolve,
+  MentionResolve,
+  LikesResolve,
+  AllTweetResolve,
+  AllUserResolve,
+  FollowersResolve,
+  FollowingResolve
+} from './resolve.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { FollowersComponent } from './followers/followers.component';
+import { FollowingComponent } from './following/following.component';
+import { MentionsComponent } from './mentions/mentions.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +51,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
     UserBlurbComponent,
     ProfileComponent,
     SignoutComponent,
-    ProfileEditPopupComponent
+    ProfileEditPopupComponent,
+    FollowersComponent,
+    FollowingComponent,
+    MentionsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,15 +75,19 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatGridListModule
   ],
   entryComponents: [ProfileEditPopupComponent],
-  providers: [UserService,
-              TweetService,
-              UserResolve,
-              CookieService,
-              TweetResolve,
-              MentionResolve,
-              LikesResolve,
-              AllTweetResolve,
-              AllUserResolve],
+  providers: [
+    UserService,
+    TweetService,
+    UserResolve,
+    CookieService,
+    TweetResolve,
+    MentionResolve,
+    LikesResolve,
+    AllTweetResolve,
+    AllUserResolve,
+    FollowersResolve,
+    FollowingResolve,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

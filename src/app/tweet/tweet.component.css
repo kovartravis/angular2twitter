@@ -1,3 +1,6 @@
+.tweet {
+  max-width: 500px;
+}
 .tweet-card-footer {
   font-size: x-small;
 }
