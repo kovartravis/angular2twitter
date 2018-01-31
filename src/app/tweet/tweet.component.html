@@ -1,18 +1,29 @@
 <div *ngIf="tweet" class="tweet">
   <mat-card class="tweet-card" fxLayout="column">
+    <mat-card-header *ngIf="tweet.inReplyTo || tweet.inRepostOf" class="tweet-card-header" fxFlexAlign="center">
+      {{tweet.inReplyTo ? 'Reply to @' + tweet.inReplyTo.author.username : 'Retweeted from @' + tweet.inRepostOf.author.username}}
+    </mat-card-header>
     <mat-card-title fxFlexAlign="center">{{tweet.author.profile.firstName + " " + tweet.author.profile.lastName}}</mat-card-title>
     <mat-card-subtitle fxFlexAlign="center"><a [routerLink]="'/profile/' + tweet.author.username" mat-button color="primary">@{{tweet.author.username}}</a></mat-card-subtitle>
     <mat-card-content fxFlexAlign="center" [innerHTML]="tweet.content | linkify"></mat-card-content>
-    <mat-card-actions fxFlexAlign="center">
-      <button mat-button color="primary"><i class="material-icons">reply</i></button>
-      <button mat-button color="primary"><i class="material-icons">repeat</i></button>
-      <button mat-button color="primary" (click)="likeTweet(tweet)"><i class="material-icons">favorite</i></button>
+    <mat-card-actions *ngIf="userService.getUserLogStatus()" fxFlexAlign="center">
+      <button mat-button color="primary" (click)="toggleReplyVisible()"><i class="material-icons">reply</i></button>
+      <button mat-button color="primary" (click)="onClickRepost(tweet.id)"><i class="material-icons">repeat</i></button>
+      <button mat-button color="primary" (click)="onClickLike(tweet)"><i class="material-icons">favorite</i></button>
     </mat-card-actions>
+    <div *ngIf="replyVisible" class="tweet-reply" fxFlexAlign="center">
+      <mat-form-field floatLabel="auto">
+        <textarea #input matInput maxlength="140" placeholder="Reply to tweet!"
+                  matTextareaAutosize matAutosizeMinRows="0" matAutosizeMaxRows="5"></textarea>
+        <mat-hint align="end">{{input.value?.length || 0}}/140</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button color="accent" fxFlexAlign="center" (click)="onClickReply(tweet.id, input.value); input.value = ''; toggleReplyVisible()">Reply</button>
+    </div>
     <mat-card-actions fxFlexAlign="center">
-      <button mat-raised-button color="accent">likes</button>
-      <button mat-raised-button color="accent">replies</button>
-      <button mat-raised-button color="accent">reposts</button>
-      <button mat-raised-button color="accent" (click)="deleteTweet(tweet)">delete</button>
+      <button *ngIf="detailButtonsVisible" mat-raised-button color="accent" (click)="tweetLikes.emit(tweet)">likes</button>
+      <button *ngIf="detailButtonsVisible" mat-raised-button color="accent" (click)="tweetReplies.emit(tweet)">replies</button>
+      <button *ngIf="detailButtonsVisible" mat-raised-button color="accent" (click)="tweetReposts.emit(tweet)">reposts</button>
+      <button *ngIf="deleteVisible" mat-raised-button color="accent" (click)="onClickDelete(tweet)">delete</button>
     </mat-card-actions>
     <mat-card-footer class="tweet-card-footer" fxFlexAlign="center">posted: {{tweet.posted | date:'medium'}}</mat-card-footer>
   </mat-card>

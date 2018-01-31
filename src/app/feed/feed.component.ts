@@ -43,6 +43,9 @@ export class FeedComponent implements OnInit {
       this.feed.splice(index, 1);
     }
   }
+  onTweetPosted(tweet: Tweet): void {
+    this.feed.unshift(tweet);
+  }
 
 
 }

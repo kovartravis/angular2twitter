@@ -11,10 +11,14 @@
         <mat-hint align="end">{{input.value?.length || 0}}/140</mat-hint>
       </mat-form-field>
       <!--<textarea fxFlexAlign="center" rows="2" style="min-height: 25px;min-width: 100px;" placeholder="Add more drama!"></textarea>-->
-      <button mat-raised-button color="primary" fxFlexAlign="center" (click)="onClickChirp(input.value); input.value = ''">Chirp!</button>
+      <button mat-raised-button color="primary" fxFlexAlign="center"
+              (click)="onClickChirp(input.value); input.value = ''">Chirp!</button>
     </div>
     <div class="feed" fxLayoutGap="10px">
-      <app-tweet *ngFor="let tweet of feed" [tweet]="tweet" (tweetDeleted)="onTweetDeleted(tweet)"></app-tweet>
+      <app-tweet *ngFor="let tweet of feed" [tweet]="tweet"
+                 (tweetDeleted)="onTweetDeleted($event)"
+                 (tweetPosted)="onTweetPosted($event)">
+      </app-tweet>
     </div>
   </div>
 </div>
