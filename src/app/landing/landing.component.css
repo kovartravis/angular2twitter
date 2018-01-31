@@ -3,21 +3,23 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    height: 50%
 }
 
 .tweet-holder{
-    height: 30vh;
+    height: 80%;
     display: flex;
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: visible;
 }
 
 .tweet{
     padding: 5px;
+    width: 30vw;
 }
 
 .tweet-view{
-    height: 30vh;
+    height: 80%;
     display: flex;
     align-self: top;
     flex: 0 0 auto;
@@ -29,16 +31,17 @@
     justify-content: center;
     align-content: center;
     padding-top: 100px;
+    height: 50%;
 }
 .user-holder{
-    height: 32vh;
+    height: 80%;
     display: flex;
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: visible;
 }
 
 .user-view{
-    height: 32vh;
+    height: 80%;
     display: flex;
     flex: 0 0 auto;
     flex-direction: row;
