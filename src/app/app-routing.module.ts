@@ -14,11 +14,12 @@ import {
   AllTweetResolve,
   AllUserResolve,
   FollowersResolve,
-  FollowingResolve
+  FollowingResolve, HashtagsResolve, TweetsWithTagResolve
 } from './resolve.service';
 import { FollowersComponent } from './followers/followers.component';
 import { FollowingComponent } from './following/following.component';
 import { MentionsComponent } from './mentions/mentions.component';
+import { HashtagComponent } from './hashtag/hashtag.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,19 @@ const routes: Routes = [
     resolve: {
       user: UserResolve,
       mentions: MentionResolve
+    }
+  }, {
+    path: 'hashtag/:label',
+    component: HashtagComponent,
+    resolve: {
+      hashtags: HashtagsResolve,
+      tweets: TweetsWithTagResolve
+    }
+  }, {
+    path: 'hashtag',
+    component: HashtagComponent,
+    resolve: {
+      hashtags: HashtagsResolve
     }
   }
 ];

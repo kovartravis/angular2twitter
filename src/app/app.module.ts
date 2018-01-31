@@ -31,13 +31,19 @@ import {
   AllTweetResolve,
   AllUserResolve,
   FollowersResolve,
-  FollowingResolve
+  FollowingResolve,
+  HashtagsResolve,
+  TweetsWithTagResolve,
 } from './resolve.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FollowersComponent } from './followers/followers.component';
 import { FollowingComponent } from './following/following.component';
 import { MentionsComponent } from './mentions/mentions.component';
+import { HashtagComponent } from './hashtag/hashtag.component';
+import { HashtagService } from './hashtag.service';
+import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -54,7 +60,8 @@ import { MentionsComponent } from './mentions/mentions.component';
     ProfileEditPopupComponent,
     FollowersComponent,
     FollowingComponent,
-    MentionsComponent
+    MentionsComponent,
+    HashtagComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +79,9 @@ import { MentionsComponent } from './mentions/mentions.component';
     FlexLayoutModule,
     HttpClientModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatListModule,
+    MatAutocompleteModule,
   ],
   entryComponents: [ProfileEditPopupComponent],
   providers: [
@@ -87,6 +96,9 @@ import { MentionsComponent } from './mentions/mentions.component';
     AllUserResolve,
     FollowersResolve,
     FollowingResolve,
+    HashtagService,
+    HashtagsResolve,
+    TweetsWithTagResolve,
   ],
   bootstrap: [AppComponent]
 })

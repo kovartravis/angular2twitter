@@ -34,6 +34,9 @@ function loadTestTweets(max) {
     // 1 random hashtag
     var j = Math.floor(Math.random() * tokens.length);
     tokens[j] = "#".concat(tokens[j]);
+    // temp solution for tags with punctuation, long-term TODO: make server ignore punctuation
+    if (tokens[j].endsWith('.') || tokens[j].endsWith(','))
+      tokens[j] = tokens[j].slice(0,-1) + ' ' + tokens[j].slice(-1);
     // 1 random mention of user already created
     j = Math.floor(Math.random() * i);
     tokens.unshift("@" + userData[j].username);

@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h2>See what's happening right now</h2>
+
+  <form class="tag-search-form">
+    <mat-form-field class="tag-full-width">
+      <input #input matInput placeholder="Search hashtags (without '#')" aria-label="Tag Label"
+             [matAutocomplete]="auto" [formControl]="stateCtrl">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onTagSelected(input.value)">
+        <mat-option *ngFor="let tag of filteredHashtags | async" [value]="tag.label">
+          <span>{{ tag.label }}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <div *ngFor="let tweet of tweets">
+    <app-tweet [tweet]="tweet"></app-tweet>
+  </div>
+</div>

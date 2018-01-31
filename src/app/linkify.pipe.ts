@@ -13,7 +13,7 @@ export class LinkifyPipe implements PipeTransform {
     const options = {
       formatHref: function (href, type) {
         if (type === 'hashtag') {
-          href = `hashtag?query=${href.substring(1)}`;
+          href = `hashtag/${href.substring(1)}`;
         }
         if (type === 'mention') {
           href = `profile/${href.substring(1)}`;
